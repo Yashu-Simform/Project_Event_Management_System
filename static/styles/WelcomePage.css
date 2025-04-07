@@ -1,0 +1,41 @@
+:root{
+    --color-black: #11120D;
+    --color-olive: #565449;
+    --color-bone: #D8CFBC;
+    --color-white: #FFFBF4;
+}
+
+body{
+    background-color: var(--color-bone);
+}
+
+.primary-text{
+    color: var(--color-black);
+}
+
+.secondary-text{
+    color: var(--color-olive);
+}
+
+.root-div{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-list-section{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+}
+
+.welcome-btn{
+    background-color: var(--color-olive);
+    color: var(--color-bone);
+}

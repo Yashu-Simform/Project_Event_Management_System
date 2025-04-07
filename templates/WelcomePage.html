@@ -1,11 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Page</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% load static %}
+
+{% extends "base.html" %}
+{% block title %}Welcome Page{% endblock title %}
+{% block inhead %}<link rel="stylesheet" href="{% static "styles/WelcomePage.css" %}">{% endblock inhead %}
+{% block content %}
+<div class="root-div">
+    <h1 class="primary-text">Welcome to our Event Management System!</h1>
+    <div style="height:40px;"></div>
+    <button id="welcome-btn" type="button" class="btn welcome-btn">Let's Go</button>
+    {% comment %} <button>Let's Go!</button> {% endcomment %}
+</div>
+<div class="event-list-section">
+    <div style="height:15px;"></div>
+    <h3 class="primary-text">Public Events:</h3>
+    <table>
+        <thead>
+            <tr>
+                {% comment %} <th>ID</th> {% endcomment %}
+                <th>Title</th>
+                <th>Host</th>
+                <th>Venue</th>
+                <th>Date</th>
+                <th>Total Participants</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in events %}
+            <tr>
+                {% comment %} <td>{{ profile.id }}</td> {% endcomment %}
+                <td>{{ e.name }}</td>
+                <td>{{ profile.email }}</td>
+                <td>{{ profile.city }}</td>
+                <td>{{ profile.roll_no }}</td>
+                <td>{{ profile.stu_class }}</td>
+                <td>
+                    <a href="{% url 'update_student' profile.id %}" class="btn btn-update">Update</a>
+                    <a href="{% url 'delete_student' profile.id %}" class="btn btn-delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% comment %} List of public events {% endcomment %}
+</div>
+{% endblock content %}
+
+{% block after %}
+<script type="module" src="{% static "scripts/welcome_page.js" %}"></script>
+{% endblock after %}

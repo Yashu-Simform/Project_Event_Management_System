@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.urls import reverse
+from .emsmodels import *
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(render_value=True))
@@ -30,3 +31,23 @@ class UserLoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+# Event Form
+class EventForm(forms.ModelForm):
+
+    # event_time = forms.DateTimeField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.add_input(Submit('create', 'Create Event', css_id='createbtn'))
+        self.helper.attrs = {'id': 'eventform'}
+        self.helper.form_action = reverse('create_event')
+
+    class Meta:
+        model = Event
+        fields = ['title', 'description', 'event_type', 'venue', 'event_time']
+
+        widgets = {
+            'event_time': forms.TextInput(attrs={'type':'datetime-local'}),
+        }

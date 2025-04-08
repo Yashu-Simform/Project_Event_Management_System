@@ -1,4 +1,4 @@
-export default get_cookie_dict;
+export {get_cookie_dict};
 
 function get_cookie_dict(cookie_str) {
     let cookie_dict = {}

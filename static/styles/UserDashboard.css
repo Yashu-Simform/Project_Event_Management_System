@@ -1,0 +1,11 @@
+:root{
+    --color-black: #11120D;
+    --color-olive: #565449;
+    --color-bone: #D8CFBC;
+    --color-white: #FFFBF4;
+}
+
+.profile-btn{
+    border-color: var(--color-olive);
+    border-width: 1px;
+}

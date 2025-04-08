@@ -5,6 +5,20 @@
     --color-white: #FFFBF4;
 }
 
+.color-black{
+    color: var(--color-black)
+}
+.color-olive{
+    color: var(--color-olive)
+}
+.color-bone{
+    color: var(--color-bone)
+}
+.color-white{
+    color: var(--color-white)
+}
+
+
 body{
     background-color: var(--color-bone);
 }
@@ -38,4 +52,34 @@ body{
 .welcome-btn{
     background-color: var(--color-olive);
     color: var(--color-bone);
+}
+
+.custom-min-col-width{
+    min-width: 100px;
+}
+
+.my-table{
+    max-width: 80%;
+    background-color: var(--color-olive);
+    color: var(--color-bone);
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-participate {
+    background-color: #4CAF50; /* Green */
+}
+
+.btn-delete {
+    background-color: #f44336; /* Red */
+}
+
+.btn:hover {
+    opacity: 0.8;
 }

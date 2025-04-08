@@ -37,11 +37,13 @@ class EventBaseSerializer(serializers.ModelSerializer):
 class CreateEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['title', 'description', 'event_type', 'venue', 'event_time']
+        fields = ['title', 'host', 'description', 'event_type', 'venue', 'event_time'] 
+
+        read_only_fields = ['host']
 
 
 class PublicEventsListSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta: 
         model = Event
         fields = ['event_id', 'title', 'host', 'event_time', 'venue', 'total_participants']
 

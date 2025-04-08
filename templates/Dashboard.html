@@ -11,32 +11,58 @@
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">EMS</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="{% url "user_dashboard" %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">MyEvents</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Invitations</a>
           </li>
         </ul>
         <button class="rounded-circle profile-btn"><i class="bi bi-person rounded-circle"></i></button>
       </div>
     </div>
   </nav>
+  <div class="container">
+    <div class="event-list-section">
+        <div style="height:15px;"></div>
+        <h3 class="primary-text">Public Events:</h3>
+        <table id="eventslist" class="table my-table">
+            <thead>
+                <tr>
+                    <th scope="col" class="custom-min-col-width">Sr. No.</th>
+                    <th scope="col" class="custom-min-col-width">Title</th>
+                    <th scope="col" class="custom-min-col-width">Host</th>
+                    <th scope="col" class="custom-min-col-width">Venue</th>
+                    <th scope="col" class="custom-min-col-width">Date</th>
+                    <th scope="col" class="custom-min-col-width">Total Participants</th>
+                    <th scope="col" class="custom-min-col-width">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for e in events %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ e.title }}</td>
+                    <td>{{ e.host }}</td>
+                    <td>{{ e.venue }}</td>
+                    <td>{{ e.event_time }}</td>
+                    <td>{{ e.total_participants }}</td>
+                    <td>
+                        <a href="#" class="btn btn-primary">Participate</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </div>
 {% endblock content %}

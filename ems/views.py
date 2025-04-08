@@ -9,15 +9,17 @@ import requests
 # Create your views here.
 class WelcomePage(View):
     def get(self, req):
-        get_response = requests.get('http://127.0.0.1:8000/api/event/public-event-list/')
-        print(get_response.text)
-        get_response = requests.get('http://127.0.0.1:8000/api/event/public-event-list/')
-        json_data = json.loads(str(get_response.text))
-        events = [e for e in json_data]
-        print('Event list response: ',get_response.text)
+        events = get_public_events_list()
         context = {'events': events}
         return render(req, 'WelcomePage.html', context=context)
     
+
+def get_public_events_list():
+    get_response = requests.get('http://127.0.0.1:8000/api/event/public-event-list/')
+    json_data = json.loads(str(get_response.text))
+    events = [e for e in json_data]
+    return events
+
 class UserRegistration(View):
 
     def get(self, req):
@@ -46,4 +48,6 @@ class CreateEvent(View):
 # User Dashboard
 class UserDashboard(View):
     def get(self, req):
-        return render(req, 'Dashboard.html')
+        events = get_public_events_list()
+        context = {'events': events}
+        return render(req, 'Dashboard.html', context=context)

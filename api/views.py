@@ -8,6 +8,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .serializers import *
 from rest_framework import status
+from rest_framework import status
 
 # API's
 
@@ -41,10 +42,28 @@ class CreateEvent(APIView):
         return Response({'status': status.HTTP_201_CREATED, 'message': 'Event created successfully!'})
     
 
+class UserEventsList(generics.ListAPIView):
+
+    permission_classes = [IsAuthenticated]
+
+    queryset = Event.objects.all()
+    serializer_class = EventBaseSerializer
+
+    def get_queryset(self):
+        print(self.request.user)
+        user_id = self.request.user.id
+        qs = Event.objects.filter(host=user_id)
+        return qs
+
 
 class UserRegistration(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserRegistrationSerializer
+
+class UserLogout(APIView):
+    def get(self, req):
+        req.COOKIES.clear()
+        return Response({'status': status.HTTP_200_OK, 'message': 'Logout Successful!'})
 
 # class UserLogin(APIView):
 #     def post(self, req):

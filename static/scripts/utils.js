@@ -1,5 +1,3 @@
-export {get_cookie_dict};
-
 function get_cookie_dict(cookie_str) {
     let cookie_dict = {}
     let all_cookies = document.cookie.split(';')
@@ -9,4 +7,9 @@ function get_cookie_dict(cookie_str) {
     });
 
     return cookie_dict
+}
+
+
+function manageToken() {
+    const cookie_dict = get_cookie_dict(document.cookie)
 }

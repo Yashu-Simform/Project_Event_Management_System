@@ -66,7 +66,7 @@ async function login() {
             //     document.cookie = `refresh=${data['data']['refresh']}; path=/;`
             // }
 
-            await getAuthJWT("http://127.0.0.1:8000/api/user/api/token/", data_body, cookie_dict);
+            await getAuthJWT("http://127.0.0.1:8000/api/user/newtoken/", data_body, cookie_dict);
             console.log('You are now loggedin.')
         })
     }
@@ -89,12 +89,10 @@ async function getAuthJWT(p_url, p_body, cookie_dict) {
     )
     .then(data => {
         if (data){
-            // console.log(data)
-            // console.log(data['access'])
             document.cookie = `access=${data['access']}; path=/;`
             document.cookie = `refresh=${data['refresh']}; path=/;`
-
-            // window.location.href = ""
+            alert('Logged in Successfully!');
+            document.location.href = 'http://127.0.0.1:8000/ems/user/dashboard/';
         }else{
             console.log('No response data!')
         }

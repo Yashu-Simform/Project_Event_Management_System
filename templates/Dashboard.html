@@ -17,52 +17,66 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li id="home" class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url "user_dashboard" %}">Home</a>
           </li>
-          <li class="nav-item">
+          <li id="myevents" class="nav-item">
             <a class="nav-link" href="#">MyEvents</a>
           </li>
-          <li class="nav-item">
+          <li id="invitations" class="nav-item">
             <a class="nav-link" href="#">Invitations</a>
           </li>
         </ul>
-        <button class="rounded-circle profile-btn"><i class="bi bi-person rounded-circle"></i></button>
+        
+        <div class="btn-group">
+          <button class="btn rounded-circle profile-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person rounded-circle"></i></button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li id="profilebtn"><button class="dropdown-item" type="button">Profile</button></li>
+            <li id="logoutbtn" ><button class="dropdown-item" type="button">Logout</button></li>
+            <li><button class="dropdown-item" type="button">Coming Soon ...</button></li>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>
-  <div class="container">
-    <div class="event-list-section">
-        <div style="height:15px;"></div>
-        <h3 class="primary-text">Public Events:</h3>
-        <table id="eventslist" class="table my-table">
-            <thead>
-                <tr>
-                    <th scope="col" class="custom-min-col-width">Sr. No.</th>
-                    <th scope="col" class="custom-min-col-width">Title</th>
-                    <th scope="col" class="custom-min-col-width">Host</th>
-                    <th scope="col" class="custom-min-col-width">Venue</th>
-                    <th scope="col" class="custom-min-col-width">Date</th>
-                    <th scope="col" class="custom-min-col-width">Total Participants</th>
-                    <th scope="col" class="custom-min-col-width">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                {% for e in events %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ e.title }}</td>
-                    <td>{{ e.host }}</td>
-                    <td>{{ e.venue }}</td>
-                    <td>{{ e.event_time }}</td>
-                    <td>{{ e.total_participants }}</td>
-                    <td>
-                        <a href="#" class="btn btn-primary">Participate</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+{% block main_content %}
+<div id="main-content" class="container">
+  <div class="event-list-section">
+      <div style="height:15px;"></div>
+      <h3 class="primary-text">Public Events:</h3>
+      <table id="eventslist" class="table my-table">
+          <thead>
+              <tr>
+                  <th scope="col" class="custom-min-col-width">Sr. No.</th>
+                  <th scope="col" class="custom-min-col-width">Title</th>
+                  <th scope="col" class="custom-min-col-width">Host</th>
+                  <th scope="col" class="custom-min-col-width">Venue</th>
+                  <th scope="col" class="custom-min-col-width">Date</th>
+                  <th scope="col" class="custom-min-col-width">Total Participants</th>
+                  <th scope="col" class="custom-min-col-width">Actions</th>
+              </tr>
+          </thead>
+          <tbody class="table-group-divider">
+              {% for e in events %}
+              <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ e.title }}</td>
+                  <td>{{ e.host }}</td>
+                  <td>{{ e.venue }}</td>
+                  <td>{{ e.event_time }}</td>
+                  <td>{{ e.total_participants }}</td>
+                  <td>
+                      <a href="#" class="btn btn-primary">Participate</a>
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
   </div>
+</div>
+{% endblock main_content %}
 {% endblock content %}
+
+{% block after %}
+<script src="{% static "scripts/user_dashboard.js" %}"></script>
+{% endblock after %}

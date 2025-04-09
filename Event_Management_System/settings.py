@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'crispy_forms',
     'crispy_bootstrap5',
     'ems',
@@ -163,5 +164,4 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,  # Uses Django’s secret key
-    "AUTH_HEADER_TYPES": ("Bearer",),
 }

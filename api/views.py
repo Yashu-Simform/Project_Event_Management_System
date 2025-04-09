@@ -41,6 +41,20 @@ class CreateEvent(APIView):
 
         return Response({'status': status.HTTP_201_CREATED, 'message': 'Event created successfully!'})
     
+class EventRetrive(generics.RetrieveAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventBaseSerializer
+    lookup_field = 'event_id'
+
+class EventUpdate(generics.UpdateAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventBaseSerializer
+    lookup_field = 'event_id'
+
+class EventDelete(generics.DestroyAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventBaseSerializer
+    lookup_field = 'event_id'
 
 class UserEventsList(generics.ListAPIView):
 

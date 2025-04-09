@@ -9,5 +9,6 @@ urlpatterns = [
     path('event/create/page/', CreateEvent.as_view(), name='event_create_page'),
     path('user/dashboard/', UserDashboard.as_view(), name='user_dashboard'),
     path('user/dashboard/myevents/', MyEventsView.as_view(), name='user_dashboard_myevents_page'),
+    path('event/<int:event_id>/retrive/', EventDetail.as_view(), name='event_details'),
 ]
     

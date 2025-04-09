@@ -9,3 +9,9 @@
     border-color: var(--color-olive);
     border-width: 1px;
 }
+
+.custom-event-detail-card{
+    display: absolute;
+    top: 50%;
+    left: 50%;
+}

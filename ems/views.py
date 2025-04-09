@@ -56,6 +56,19 @@ class CreateEvent(View):
         context = {'form_obj': form_obj}
         return render(req, 'EventCreateForm.html', context=context)
     
+class EventDetail(View):
+    def get(self, req, event_id):
+        tokens = get_tokens(req)
+        event = self.get_event_details(tokens, event_id)
+        context = {'event': event}
+        return render(req, 'EventDetails.html', context=context)
+        
+    def get_event_details(self, tokens, event_id):
+        access_token = tokens.get('access')
+        header = {'Authorization': f'Bearer {access_token}'}
+        response = requests.get(f'http://127.0.0.1:8000/api/event/{event_id}/retrive/', headers=header)
+        event = json.loads(str(response.text))
+        return event
 
 # User Dashboard
 class UserDashboard(View):

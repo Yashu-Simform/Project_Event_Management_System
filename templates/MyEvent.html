@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="event-list-section">
     <div style="height:15px;"></div>
     <h3 class="primary-text">Public Events:</h3>
@@ -25,9 +27,12 @@
                 <td>
                     <a href="#" class="btn btn-success">Update</a>
                     <a href="#" class="btn btn-danger">Delete</a>
+                    <a id="vieweventbtn" value="{{forloop.counter}}" href="#" class="btn btn-primary rounded-circle profile-btn"><i class="bi bi-eye"></i></a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div id="event-detail"></div>
 </div>
+<script src="{% static "scripts/my_events_list.js" %}"></script>

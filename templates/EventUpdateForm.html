@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Update Event{% endblock title %}
+{% block content %}
+<div class="container" style="width:50%;">
+    <h1>{% block heading %} Update Event {% endblock heading %}</h1>
+    {% crispy form_obj form_obj.helper %}
+</div>
+{% endblock content %}
+{% block after %}
+<script type="module" src="{% static "scripts/event_update_page.js" %}"></script>
+{% endblock after %}    

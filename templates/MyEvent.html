@@ -1,5 +1,8 @@
+{% extends "Dashboard.html" %}
+
 {% load static %}
 
+{% block main_content %}
 <div class="event-list-section">
     <div style="height:15px;"></div>
     <h3 class="primary-text">Public Events:</h3>
@@ -25,9 +28,9 @@
                 <td>{{ e.event_time }}</td>
                 <td>{{ e.total_participants }}</td>
                 <td>
-                    <a href="#" class="btn btn-success">Update</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
-                    <a id="vieweventbtn" value="{{forloop.counter}}" href="#" class="btn btn-primary rounded-circle profile-btn"><i class="bi bi-eye"></i></a>
+                    <a id="updatebtn{{e.event_id}}" name="updateeventbtn" class="btn btn-success">Update</a>
+                    <a id="deletebtn{{e.event_id}}" name="deleteeventbtn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmdelmodel">Delete</a>
+                    <a name="vieweventbtn" id="{{e.event_id}}" class="btn btn-primary rounded-circle profile-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-eye"></i></a>
                 </td>
             </tr>
             {% endfor %}
@@ -35,4 +38,51 @@
     </table>
     <div id="event-detail"></div>
 </div>
+
+{% comment %} Model for event detail {% endcomment %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Event title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Description
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+{% comment %} Model for delete confirmation {% endcomment %}
+<!-- Modal -->
+<div class="modal fade" id="confirmdelmodel" tabindex="-1" aria-labelledby="confirmDelModelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="confirmDelModelLabel">Confirm Delete?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="confirmdelbody" class="modal-body" name="confirmdelbody">
+          Are you sure you want to delete?
+          Once event is deleted the data related to this event will be lost permenantly!
+        </div>
+        <div class="modal-footer">
+          <button id="canceldelbtn" type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+          <button id="confirmdelbtn" type="button" class="btn btn-danger">Confirm Delete</button>
+        </div>
+      </div>
+    </div>
+</div>
+  
+
+{% endblock main_content %}
+
+{% block afterjs %}
 <script src="{% static "scripts/my_events_list.js" %}"></script>
+{% endblock afterjs %}

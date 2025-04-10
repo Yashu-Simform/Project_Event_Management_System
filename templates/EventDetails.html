@@ -1,9 +1,20 @@
-<div class="card custom-event-detail-card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">{{ event.title }}</h5>
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{ event.title }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="card-subtitle mb-2 text-body-secondary">Type: {{ event.event_type }}</h6>
         <h6 class="card-subtitle mb-2 text-body-secondary">Venue: {{ event.venue }}</h6>
-        <p class="card-text">{{ event.description }}</p>
-        <a href="#" class="btn btn-success">Update</a>
-        <a href="#" class="btn btn-danger">Delete</a>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Date and Time: {{ event.event_time }}</h6>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Total Participants: {{ event.total_participants }}</h6>
+        Description: {{ event.description }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Update</button>
+        <button type="button" class="btn btn-primary">Delete</button>
+      </div>
     </div>
-</div>
+  </div>
+  

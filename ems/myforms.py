@@ -51,3 +51,23 @@ class EventForm(forms.ModelForm):
         widgets = {
             'event_time': forms.TextInput(attrs={'type':'datetime-local'}),
         }
+
+class EventUpdateForm(forms.ModelForm):
+    title = forms.CharField(initial='Hello' ,widget=forms.TextInput())
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.attrs = {'id': 'eventupdateform'}
+        self.helper.add_input(Submit('update', 'Update Event', css_id='updatebtn'))
+
+    class Meta:
+        model = Event
+        fields = ['title', 'description', 'event_type', 'venue', 'event_time']
+
+        widgets = {
+            'title': forms.TextInput(),
+            'description': forms.TextInput(),
+            'venue': forms.TextInput(),
+            'event_time': forms.TextInput(attrs={'type':'datetime-local'})
+        }

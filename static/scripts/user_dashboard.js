@@ -7,11 +7,14 @@ myevents.addEventListener('click', function (event) {
     fetch('http://127.0.0.1:8000/ems/user/dashboard/myevents/', {
         method: 'GET',
     })
-    .then(response => response.text())
+    .then(response => {
+        if (response.ok){
+            window.location.href = "http://127.0.0.1:8000/ems/user/dashboard/myevents/";
+        }
+        return response.json();
+    })
     .then(data => {
-        console.log(data)
-        const maincontent = document.getElementById('main-content')
-        maincontent.innerHTML = data
+        console.log(data);
     })
 });
 

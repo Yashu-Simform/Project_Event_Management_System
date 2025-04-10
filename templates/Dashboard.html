@@ -39,8 +39,9 @@
       </div>
     </div>
   </nav>
-{% block main_content %}
+
 <div id="main-content" class="container">
+  {% block main_content %}
   <div class="event-list-section">
       <div style="height:15px;"></div>
       <h3 class="primary-text">Public Events:</h3>
@@ -73,10 +74,12 @@
           </tbody>
       </table>
   </div>
+  {% endblock main_content %}
 </div>
-{% endblock main_content %}
 {% endblock content %}
+
 
 {% block after %}
 <script src="{% static "scripts/user_dashboard.js" %}"></script>
+{% block afterjs %}{% endblock afterjs %}
 {% endblock after %}

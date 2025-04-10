@@ -46,9 +46,9 @@ class EventRetrive(generics.RetrieveAPIView):
     serializer_class = EventBaseSerializer
     lookup_field = 'event_id'
 
-class EventUpdate(generics.UpdateAPIView):
+class EventUpdate(generics.RetrieveUpdateAPIView):
     queryset = Event.objects.all()
-    serializer_class = EventBaseSerializer
+    serializer_class = CreateEventSerializer
     lookup_field = 'event_id'
 
 class EventDelete(generics.DestroyAPIView):

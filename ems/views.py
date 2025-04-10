@@ -100,6 +100,23 @@ class MyEventsView(View):
 
         return myevents
     
+
+class EventUpdateView(View):
+    def get(self, req, event_id):
+        curr_event = EventUpdateView.get_event_update_data(event_id)
+        updateform = EventUpdateForm(initial=curr_event)
+        context = {'form_obj': updateform}
+        return render(req, 'EventUpdateForm.html', context=context)
+    
+    def get_event_update_data(event_id):
+        response = requests.get(f'http://127.0.0.1:8000/api/event/{event_id}/update/')
+        curr_event = json.loads(str(response.text))
+        curr_event['event_time'] = EventUpdateView.format_datetime(curr_event['event_time'])
+        return curr_event
+    
+    def format_datetime(time_s):
+        return str(time_s[:10] + ' ' + time_s[11:16])
+
 def get_tokens(req):
     cookie_dict = get_cookie_dict(req.headers['Cookie'])
 
@@ -123,7 +140,7 @@ def user_authenticate(cookie_dict) -> bool:
         return True
 
     # Call to get refreshed token
-    return get_refreshed_token()
+    return get_refreshed_token(cookie_dict)
 
     
 def get_refreshed_token(cookie_dict):

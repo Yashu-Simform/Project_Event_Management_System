@@ -5,6 +5,6 @@ urlpatterns = [
     path('create/', CreateEvent.as_view(), name='create_event'),
     path('public-event-list/', PublicEventList.as_view(), name='public_event_list'),
     path('<int:event_id>/retrive/', EventRetrive.as_view(), name='event_retrive'),
-    path('<int:event_id>/update/', EventRetrive.as_view(), name='event_update'),
-    path('<int:event_id>/delete/', EventRetrive.as_view(), name='event_delete'),
+    path('<int:event_id>/update/', EventUpdate.as_view(), name='event_update'),
+    path('<int:event_id>/delete/', EventDelete.as_view(), name='event_delete'),
 ]

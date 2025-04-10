@@ -48,7 +48,11 @@ class PublicEventsListSerializer(serializers.ModelSerializer):
         fields = ['event_id', 'title', 'host', 'event_time', 'venue', 'total_participants']
 
 
+# Invite Module
 class InviteBaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invite
         fields = '__all__'
+
+class CreateInviteSerializer(InviteBaseSerializer):
+    pass

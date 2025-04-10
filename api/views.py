@@ -33,7 +33,7 @@ class CreateEvent(APIView):
         eventdata.pop('csrfmiddlewaretoken')
         print(eventdata)
         # eventdata['host'] = self.request.user
-        serializer = CreateEventSerializer(data=eventdata)
+        serializer = CreateEventSerializer(data=eventdata)  
         if not serializer.is_valid():
             return Response({'status': status.HTTP_400_BAD_REQUEST, 'message': 'Invalid Data!'})
         

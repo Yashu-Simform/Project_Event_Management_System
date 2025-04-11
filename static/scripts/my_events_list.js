@@ -67,5 +67,9 @@ const confirmdelbtn = document.getElementById('confirmdelbtn')
 const invitebtns = document.getElementsByName('invitebtn')
 
 invitebtns.forEach(invitebtn => {
-    
+    invitebtn.addEventListener('click', function (event) {
+        let event_id = invitebtn.id
+        event_id = event_id.slice(9, event_id.length)
+        console.log(event_id)
+    })
 });

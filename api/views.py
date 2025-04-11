@@ -10,6 +10,9 @@ from .serializers import *
 from rest_framework import status
 from rest_framework import status
 
+from .views_invite import *
+from .views_event import *
+
 # API's
 
 class PublicEventList(generics.ListAPIView):

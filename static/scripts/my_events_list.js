@@ -63,3 +63,9 @@ const confirmdelbtn = document.getElementById('confirmdelbtn')
         })
         .then(data => console.log(data))
 })
+
+const invitebtns = document.getElementsByName('invitebtn')
+
+invitebtns.forEach(invitebtn => {
+    
+});

@@ -1,6 +1,30 @@
-{% extends "base.html" %}
+{% extends "Dashboard.html" %}
 {% load static %}
 
-{% block main_content %}
+{% load crispy_forms_tags %}
 
+{% block main_content %}
+<div class="d-flex flex-column justify-content-center">
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#invitesentmodel" data-bs-whatever="@mdo">Single Invite</button>
+        <button type="button" class="btn btn-outline-primary">Upload File</button>
+    </div>
+
+    <div class="modal fade" id="invitesentmodel" tabindex="-1" aria-labelledby="inviteSentLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="inviteSentLabel">Sent Invite</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            {% crispy form_obj form_obj.helper %}
+            
+          </div>
+        </div>
+    </div>
+</div>
 {% endblock main_content %}
+
+{% block afterjs %}
+<script src="{% static "scripts/invitation_page.js" %}"></script>
+{% endblock afterjs %}

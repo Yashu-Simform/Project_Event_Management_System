@@ -1,4 +1,5 @@
 const myevents = document.getElementById('myevents')
+const invitations = document.getElementById('invitations')
 const logoutbtn = document.getElementById('logoutbtn')
 
 myevents.addEventListener('click', function (event) {
@@ -10,6 +11,23 @@ myevents.addEventListener('click', function (event) {
     .then(response => {
         if (response.ok){
             window.location.href = "http://127.0.0.1:8000/ems/user/dashboard/myevents/";
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+});
+
+invitations.addEventListener('click', function (event) {
+    event.preventDefault();
+    console.log('Invitations button called!');
+    fetch('http://127.0.0.1:8000/ems/user/dashboard/invitations/', {
+        method: 'GET',
+    })
+    .then(response => {
+        if (response.ok){
+            window.location.href = "http://127.0.0.1:8000/ems/user/dashboard/invitations/";
         }
         return response.json();
     })

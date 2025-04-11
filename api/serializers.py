@@ -47,6 +47,13 @@ class PublicEventsListSerializer(serializers.ModelSerializer):
         model = Event
         fields = ['event_id', 'title', 'host', 'event_time', 'venue', 'total_participants']
 
+class EventChoicesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ['event_id', 'title']
+
+        read_only_fields = ['event_id', 'title']
+
 
 # Invite Module
 class InviteBaseSerializer(serializers.ModelSerializer):
@@ -54,5 +61,10 @@ class InviteBaseSerializer(serializers.ModelSerializer):
         model = Invite
         fields = '__all__'
 
-class CreateInviteSerializer(InviteBaseSerializer):
-    pass
+class CreateInviteSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(write_only=True, required=True)
+
+    class Meta:
+        model = Invite
+        fields = ['invite_from', 'invite_to', 'status', 'create_timestamp', 'event', 'email']
+        # fields.append('email')

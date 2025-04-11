@@ -88,7 +88,12 @@ class MyEventsView(View):
     def get(self, req):
         tokens = get_tokens(req)
         myevents = self.get_my_events(tokens)
-        context = {'events': myevents}
+        choices = get_event_choice_data()
+        print(choices)
+        form_obj = InviteSentForm()
+        form_obj.fields.get('events').choices = choices
+        # form_obj.events.choices = [('hi', 'Hi'), ('hello', 'Hello')]
+        context = {'events': myevents,'form_obj': form_obj}
         return render(req, 'MyEvent.html', context=context)
 
     def get_my_events(self, tokens):
@@ -116,6 +121,23 @@ class EventUpdateView(View):
     
     def format_datetime(time_s):
         return str(time_s[:10] + ' ' + time_s[11:16])
+    
+class InvitationsView(View):
+    def get(self, req):
+        choices = get_event_choice_data()
+        print(choices)
+        form_obj = InviteSentForm()
+        form_obj.fields.get('events').choices = choices
+        context = {'form_obj': form_obj}
+        return render(req, 'InvitationsBase.html', context=context)
+
+
+def get_event_choice_data():
+        response = requests.get('http://127.0.0.1:8000/api/event/event-choices/')
+        json_data = json.loads(str(response.text))
+        choices = [(c['event_id'], c['title']) for c in json_data]
+        return choices
+
 
 def get_tokens(req):
     cookie_dict = get_cookie_dict(req.headers['Cookie'])

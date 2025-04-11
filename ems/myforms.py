@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout, Div, Button, HTML
 from django.urls import reverse
 from .emsmodels import *
 
@@ -71,3 +71,30 @@ class EventUpdateForm(forms.ModelForm):
             'venue': forms.TextInput(),
             'event_time': forms.TextInput(attrs={'type':'datetime-local'})
         }
+
+
+# Invitation
+class InviteSentForm(forms.ModelForm):
+    invite_to = forms.EmailField(label="Email: ", required=True, widget=forms.EmailInput())
+    events = forms.ChoiceField(choices=[('hi', 'Hi'), ('hello', 'Hello')], required=True, label = 'Select Event: ')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.attrs = {'id': 'inviteform'}
+        self.helper.layout = Layout(
+            Div(    
+                'invite_to',
+                'events',
+                css_class='modal-body'
+            ),
+            Div(
+                HTML('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>'),
+                Submit(name='sendinvite', value='sendInvite', css_id='sendInviteBtn'),
+                css_class="modal-footer"
+            )
+        )
+    
+    class Meta:
+        model = Invite
+        fields = ['invite_to']

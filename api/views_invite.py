@@ -15,8 +15,15 @@ class CreateInvite(APIView):
 
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, event_id, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         invite_data = request.data
+        print(invite_data)
+        event_id = invite_data['event_id'] if 'event_id' in invite_data else None
+
+        if not event_id:
+            return Response({'status': status.HTTP_400_BAD_REQUEST, 'message': 'Event ID is required!'})
+        
+        invite_data.pop('event_id')
 
         serializer = CreateInviteSerializer(data=invite_data)
 

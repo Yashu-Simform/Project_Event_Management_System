@@ -29,7 +29,7 @@
                 <td>{{ e.event_time }}</td>
                 <td>{{ e.total_participants }}</td>
                 <td>
-                    <a id="invitebtn{{e.event_id}}" name="invitebtn" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#invitesentmodel">Invite</a>
+                    {% comment %} <a id="invitebtn{{e.event_id}}" name="invitebtn" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#invitesentmodel">Invite</a> {% endcomment %}
                     <a id="updatebtn{{e.event_id}}" name="updateeventbtn" class="btn btn-success">Update</a>
                     <a id="deletebtn{{e.event_id}}" name="deleteeventbtn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmdelmodel">Delete</a>
                     <a name="vieweventbtn" id="{{e.event_id}}" class="btn btn-primary rounded-circle profile-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-eye"></i></a>
@@ -83,7 +83,7 @@
 </div>
 
 {% comment %} Model for Invite {% endcomment %}
-<div class="modal fade" id="invitesentmodel" tabindex="-1" aria-labelledby="inviteSentLabel" aria-hidden="true">
+{% comment %} <div class="modal fade" id="invitesentmodel" tabindex="-1" aria-labelledby="inviteSentLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -93,11 +93,12 @@
       {% crispy form_obj form_obj.helper %}
     </div>
   </div>
-</div>
+</div> {% endcomment %}
   
 
 {% endblock main_content %}
 
 {% block afterjs %}
 <script src="{% static "scripts/my_events_list.js" %}"></script>
+{% comment %} <script src="{% static "scripts/invitation_sent_handler.js" %}"></script> {% endcomment %}
 {% endblock afterjs %}

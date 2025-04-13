@@ -1,4 +1,3 @@
-const sendInviteBtn = document.getElementById('sendInviteBtn')
 const inviteForm = document.getElementById('inviteform')
 
 function get_cookie_dict(cookie_str) {
@@ -51,5 +50,9 @@ inviteForm.addEventListener('submit', function (event) {
     })
     .then(data => {
         console.log(data);
+        if (data['status'] == 200){
+            alert(data['message']);
+            window.location.reload(true);
+        }
     })
 })

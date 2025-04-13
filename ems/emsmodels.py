@@ -17,6 +17,6 @@ class Invite(models.Model):
     invite_id = models.AutoField(verbose_name='invite_id', primary_key=True, auto_created=True, blank=True, null=False)  #PK
     invite_from = models.ForeignKey(verbose_name='from', to=User, on_delete=models.CASCADE, related_name='invite_from', blank=True, null=False) #FK -> User
     invite_to = models.ForeignKey(verbose_name='to', to=User, on_delete=models.CASCADE, null=False, related_name='invite_to', blank=True)    #FK -> User
-    status = models.CharField(verbose_name='status', choices={'pending' : 'Pending', 'accepted' : 'Accepted', 'rejected': 'Rejected'}, default='Pending', db_default='pending')
+    status = models.CharField(verbose_name='status', choices={'pending' : 'Pending', 'accepted' : 'Accepted', 'declined': 'Declined'}, default='Pending', db_default='pending')
     create_timestamp = models.DateTimeField(auto_now=True, auto_created=True, null=True, blank=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, blank=True, null=False)  #FK -> Event

@@ -75,7 +75,7 @@ class EventUpdateForm(forms.ModelForm):
 
 # Invitation
 class InviteSentForm(forms.ModelForm):
-    email = forms.EmailField(label="Email: ", required=True, widget=forms.EmailInput())
+    receiver_email = forms.EmailField(label="Email: ", required=True, widget=forms.EmailInput())
     event_id = forms.ChoiceField(choices=[('hi', 'Hi'), ('hello', 'Hello')], required=True, label = 'Select Event: ')
 
     def __init__(self, *args, **kwargs):
@@ -84,7 +84,7 @@ class InviteSentForm(forms.ModelForm):
         self.helper.attrs = {'id': 'inviteform'}
         self.helper.layout = Layout(
             Div(    
-                'email',
+                'receiver_email',
                 'event_id',
                 css_class='modal-body'
             ),

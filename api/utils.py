@@ -1,6 +1,7 @@
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string
+from ems.emsmodels import *
 
 def send_invite_mail(subject, context, recipient_list):
     from_email = settings.EMAIL_HOST_USER

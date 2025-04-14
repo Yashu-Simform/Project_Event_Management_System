@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'crispy_forms',
     'crispy_bootstrap5',
+    'api',
     'ems',
 ]
 
@@ -173,3 +174,8 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+
+# CELERY SETTINGS
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"

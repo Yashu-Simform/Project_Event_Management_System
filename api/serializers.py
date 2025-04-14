@@ -62,9 +62,8 @@ class InviteBaseSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CreateInviteSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(write_only=True, required=True)
 
     class Meta:
         model = Invite
-        fields = ['invite_from', 'invite_to', 'status', 'create_timestamp', 'event', 'email']
+        fields = ['invite_from', 'invite_to', 'status', 'create_timestamp', 'event', 'receiver_email']
         # fields.append('email')

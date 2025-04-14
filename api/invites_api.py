@@ -2,5 +2,6 @@ from django.urls import path, include
 from .views import *
 
 urlpatterns = [
-    path('<event_id>/save/', CreateInvite.as_view(), name='create_invite'),
+    path('save/', CreateInvite.as_view(), name='create_invite'),
+    path('invitation-response/<int:invite_id>/<status>/', ResponseToInvitation.as_view(), name='invitation_response'),
 ]

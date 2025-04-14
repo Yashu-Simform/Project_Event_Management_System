@@ -91,7 +91,7 @@ class MyEventsView(View):
         choices = get_event_choice_data()
         print(choices)
         form_obj = InviteSentForm()
-        form_obj.fields.get('events').choices = choices
+        form_obj.fields.get('event_id').choices = choices
         # form_obj.events.choices = [('hi', 'Hi'), ('hello', 'Hello')]
         context = {'events': myevents,'form_obj': form_obj}
         return render(req, 'MyEvent.html', context=context)
@@ -127,7 +127,7 @@ class InvitationsView(View):
         choices = get_event_choice_data()
         print(choices)
         form_obj = InviteSentForm()
-        form_obj.fields.get('events').choices = choices
+        form_obj.fields.get('event_id').choices = choices
         context = {'form_obj': form_obj}
         return render(req, 'InvitationsBase.html', context=context)
 

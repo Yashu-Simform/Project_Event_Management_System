@@ -12,5 +12,13 @@ from rest_framework import status
 
 
 class EventChoiceData(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+
     queryset = Event.objects.all()
     serializer_class = EventChoicesSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+
+        qs = Event.objects.filter(host=user)
+        return qs

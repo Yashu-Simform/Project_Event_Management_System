@@ -88,7 +88,7 @@ class MyEventsView(View):
     def get(self, req):
         tokens = get_tokens(req)
         myevents = self.get_my_events(tokens)
-        choices = get_event_choice_data()
+        choices = get_event_choice_data(tokens)
         print(choices)
         form_obj = InviteSentForm()
         form_obj.fields.get('event_id').choices = choices
@@ -99,6 +99,7 @@ class MyEventsView(View):
     def get_my_events(self, tokens):
         access_token = tokens.get('access')
         header = {'Authorization': f'Bearer {access_token}'}
+        # print(header)
         response = requests.get('http://127.0.0.1:8000/api/user/events-list/', headers=header) 
         json_data = json.loads(str(response.text))
         myevents = [e for e in json_data]
@@ -124,7 +125,8 @@ class EventUpdateView(View):
     
 class InvitationsView(View):
     def get(self, req):
-        choices = get_event_choice_data()
+        tokens = get_tokens(req)
+        choices = get_event_choice_data(tokens)
         print(choices)
         form_obj = InviteSentForm()
         form_obj.fields.get('event_id').choices = choices
@@ -132,9 +134,12 @@ class InvitationsView(View):
         return render(req, 'InvitationsBase.html', context=context)
 
 
-def get_event_choice_data():
-        response = requests.get('http://127.0.0.1:8000/api/event/event-choices/')
+def get_event_choice_data(tokens):
+        access_token = tokens.get('access')
+        header = {'Authorization': f'Bearer {access_token}'}
+        response = requests.get('http://127.0.0.1:8000/api/event/event-choices/', headers=header)
         json_data = json.loads(str(response.text))
+        print(json_data)
         choices = [(c['event_id'], c['title']) for c in json_data]
         return choices
 

@@ -5,14 +5,18 @@ from .myforms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 import json
-
 import requests
+
+from Event_Management_System.celery import add
+from api.tasks import sub
 
 # Create your views here.
 class WelcomePage(View):
     def get(self, req):
         events = get_public_events_list()
         context = {'events': events}
+        result = sub.delay(5,10)
+        print('result = ', result)
         return render(req, 'WelcomePage.html', context=context)
     
 

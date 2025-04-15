@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import *
 from rest_framework import status as status_code
 from .utils import send_invite_mail
-
+from datetime import datetime
 
 class CreateInvite(APIView):
 
@@ -31,7 +31,6 @@ class CreateInvite(APIView):
             #   Get event from db.
             try:
                 event = Event.objects.get(event_id = event_id)
-                print(event.title)
             except:
                 return Response({'status': status_code.HTTP_404_NOT_FOUND, 'message': 'Event not found!'})
 

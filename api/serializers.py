@@ -57,12 +57,12 @@ class EventChoicesSerializer(serializers.ModelSerializer):
 
 # Invite Module
 class InviteBaseSerializer(serializers.ModelSerializer):
+    create_timestamp = serializers.DateTimeField(format='%B %d %Y %I:%M %p')
     class Meta:
         model = Invite
         fields = '__all__'
 
 class CreateInviteSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Invite
         fields = ['invite_from', 'invite_to', 'status', 'create_timestamp', 'event', 'receiver_email']

@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ems', '0003_event_description_event_title'),
+        ("ems", "0003_event_description_event_title"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='event_id',
-            field=models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='event_id'),
+            model_name="event",
+            name="event_id",
+            field=models.AutoField(
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="event_id",
+            ),
         ),
     ]

@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ems', '0002_event_event_type'),
+        ("ems", "0002_event_event_type"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='description',
-            field=models.TextField(db_default=''),
+            model_name="event",
+            name="description",
+            field=models.TextField(db_default=""),
         ),
         migrations.AddField(
-            model_name='event',
-            name='title',
-            field=models.CharField(default='An event', max_length=255),
+            model_name="event",
+            name="title",
+            field=models.CharField(default="An event", max_length=255),
         ),
     ]

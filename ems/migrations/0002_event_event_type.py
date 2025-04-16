@@ -6,13 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ems', '0001_initial'),
+        ("ems", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='event_type',
-            field=models.CharField(choices=[('private', 'Private'), ('public', 'Public')], db_default='private', default='Private', max_length=15, verbose_name='event_type'),
+            model_name="event",
+            name="event_type",
+            field=models.CharField(
+                choices=[("private", "Private"), ("public", "Public")],
+                db_default="private",
+                default="Private",
+                max_length=15,
+                verbose_name="event_type",
+            ),
         ),
     ]

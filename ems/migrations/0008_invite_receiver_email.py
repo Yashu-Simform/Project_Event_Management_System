@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ems', '0007_alter_invite_status'),
+        ("ems", "0007_alter_invite_status"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='invite',
-            name='receiver_email',
-            field=models.EmailField(default='anonymususer@ems.com', max_length=254, verbose_name='receiver_email'),
+            model_name="invite",
+            name="receiver_email",
+            field=models.EmailField(
+                default="anonymususer@ems.com",
+                max_length=254,
+                verbose_name="receiver_email",
+            ),
         ),
     ]

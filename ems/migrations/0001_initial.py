@@ -15,25 +15,87 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Event',
+            name="Event",
             fields=[
-                ('create_timestamp', models.DateTimeField(auto_created=True, auto_now=True, null=True)),
-                ('event_id', models.IntegerField(auto_created=True, blank=True, primary_key=True, serialize=False, verbose_name='event_id')),
-                ('event_time', models.DateTimeField()),
-                ('venue', models.TextField()),
-                ('total_participants', models.IntegerField(db_default=0, default=0)),
-                ('host', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "create_timestamp",
+                    models.DateTimeField(auto_created=True, auto_now=True, null=True),
+                ),
+                (
+                    "event_id",
+                    models.IntegerField(
+                        auto_created=True,
+                        blank=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="event_id",
+                    ),
+                ),
+                ("event_time", models.DateTimeField()),
+                ("venue", models.TextField()),
+                ("total_participants", models.IntegerField(db_default=0, default=0)),
+                (
+                    "host",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Invite',
+            name="Invite",
             fields=[
-                ('create_timestamp', models.DateTimeField(auto_created=True, auto_now=True, null=True)),
-                ('invite_id', models.IntegerField(auto_created=True, blank=True, primary_key=True, serialize=False, verbose_name='invite_id')),
-                ('status', models.CharField(choices=[('pending', 'Pending'), ('accepted', 'Accepted'), ('rejected', 'Rejected')], verbose_name='status')),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ems.event')),
-                ('invite_from', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='invite_from', to=settings.AUTH_USER_MODEL, verbose_name='from')),
-                ('invite_to', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='invite_to', to=settings.AUTH_USER_MODEL, verbose_name='to')),
+                (
+                    "create_timestamp",
+                    models.DateTimeField(auto_created=True, auto_now=True, null=True),
+                ),
+                (
+                    "invite_id",
+                    models.IntegerField(
+                        auto_created=True,
+                        blank=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="invite_id",
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("pending", "Pending"),
+                            ("accepted", "Accepted"),
+                            ("rejected", "Rejected"),
+                        ],
+                        verbose_name="status",
+                    ),
+                ),
+                (
+                    "event",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="ems.event"
+                    ),
+                ),
+                (
+                    "invite_from",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="invite_from",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="from",
+                    ),
+                ),
+                (
+                    "invite_to",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="invite_to",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="to",
+                    ),
+                ),
             ],
         ),
     ]

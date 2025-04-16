@@ -8,19 +8,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ems', '0005_alter_invite_event_alter_invite_invite_from_and_more'),
+        ("ems", "0005_alter_invite_event_alter_invite_invite_from_and_more"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='invite',
-            name='invite_id',
-            field=models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='invite_id'),
+            model_name="invite",
+            name="invite_id",
+            field=models.AutoField(
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="invite_id",
+            ),
         ),
         migrations.AlterField(
-            model_name='invite',
-            name='invite_to',
-            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='invite_to', to=settings.AUTH_USER_MODEL, verbose_name='to'),
+            model_name="invite",
+            name="invite_to",
+            field=models.ForeignKey(
+                blank=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="invite_to",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="to",
+            ),
         ),
     ]

@@ -11,58 +11,83 @@ from rest_framework import status as status_code
 from .utils import send_invite_mail
 from datetime import datetime
 
+
 class CreateInvite(APIView):
 
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         invite_data = request.data
-        print(invite_data)
-        event_id = invite_data['event_id'] if 'event_id' in invite_data else None
+        # print(invite_data)
+        # event_id = invite_data['event_id'] if 'event_id' in invite_data else None
 
-        if not event_id:
-            return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'message': 'Event ID is required!'})
-        
-        invite_data.pop('event_id')
+        # if not event_id:
+        #     return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'message': 'Event ID is required!'})
+
+        # invite_data.pop('event_id')
 
         serializer = CreateInviteSerializer(data=invite_data)
 
         if serializer.is_valid():
             #   Get event from db.
-            try:
-                event = Event.objects.get(event_id = event_id)
-            except:
-                return Response({'status': status_code.HTTP_404_NOT_FOUND, 'message': 'Event not found!'})
+            # try:
+            #     event = Event.objects.get(event_id = event_id)
+            # except:
+            #     return Response({'status': status_code.HTTP_404_NOT_FOUND, 'message': 'Event not found!'})
 
             #   Check participant exist in user db.
             try:
-                invite_to = User.objects.get(email=serializer.validated_data['receiver_email'])
+                invite_to = User.objects.get(
+                    email=serializer.validated_data["receiver_email"]
+                )
             except:
                 #   Reference to an anonymous user.
                 invite_to = User.objects.get(id=0)
-            instance = serializer.save(invite_from = self.request.user, invite_to = invite_to, event = event)
+            instance = serializer.save(
+                invite_from=self.request.user, invite_to=invite_to
+            )
 
-            return Response({'status': status_code.HTTP_200_OK, 'message': 'Invite Sent Successfully!'})
+            return Response(
+                {
+                    "status": status_code.HTTP_200_OK,
+                    "message": "Invite Sent Successfully!",
+                }
+            )
         else:
             print(serializer.errors)
-        
-        return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'message': 'Invalid Data!'})
+
+        return Response(
+            {"status": status_code.HTTP_400_BAD_REQUEST, "message": "Invalid Data!"}
+        )
 
 
 class ResponseToInvitation(APIView):
     def get(self, req, invite_id, status):
         invite = Invite.objects.get(invite_id=invite_id) if invite_id else None
         if not invite:
-            return Response({'status': status_code.HTTP_404_NOT_FOUND, 'message': 'Invite not found!'})
-        
-        if status == 'Accepted':
-            invite.status = 'Accepted'
+            return Response(
+                {
+                    "status": status_code.HTTP_404_NOT_FOUND,
+                    "message": "Invite not found!",
+                }
+            )
+
+        if status == "Accepted":
+            invite.status = "Accepted"
             invite.save()
-            return Response({'status': status_code.HTTP_200_OK, 'message': 'Invite Accepted!'})
-        elif status == 'Declined':
-            invite.status = 'Declined'
+            return Response(
+                {"status": status_code.HTTP_200_OK, "message": "Invite Accepted!"}
+            )
+        elif status == "Declined":
+            invite.status = "Declined"
             invite.save()
-            return Response({'status': status_code.HTTP_200_OK, 'message': 'Invite Declined!'})
-        
-        return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'message': 'Invalid query params!'})
-        
+            return Response(
+                {"status": status_code.HTTP_200_OK, "message": "Invite Declined!"}
+            )
+
+        return Response(
+            {
+                "status": status_code.HTTP_400_BAD_REQUEST,
+                "message": "Invalid query params!",
+            }
+        )

@@ -44,7 +44,12 @@ function main(){
         })
         .then((response) => {
             if (!response.ok){
-                throw new Error(`Error occured with status code: ${response.status}`);
+                if (response.status == 429){
+                    alert('You have reached the limit of requests allowed!')
+                }else{
+                    throw new Error(`Error occured with status code: ${response.status}`);
+                }
+                
             }
             return response.json();
         })

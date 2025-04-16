@@ -8,29 +8,53 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ems', '0004_alter_event_event_id'),
+        ("ems", "0004_alter_event_event_id"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='invite',
-            name='event',
-            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to='ems.event'),
+            model_name="invite",
+            name="event",
+            field=models.ForeignKey(
+                blank=True, on_delete=django.db.models.deletion.CASCADE, to="ems.event"
+            ),
         ),
         migrations.AlterField(
-            model_name='invite',
-            name='invite_from',
-            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='invite_from', to=settings.AUTH_USER_MODEL, verbose_name='from'),
+            model_name="invite",
+            name="invite_from",
+            field=models.ForeignKey(
+                blank=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="invite_from",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="from",
+            ),
         ),
         migrations.AlterField(
-            model_name='invite',
-            name='invite_to',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='invite_to', to=settings.AUTH_USER_MODEL, verbose_name='to'),
+            model_name="invite",
+            name="invite_to",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="invite_to",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="to",
+            ),
         ),
         migrations.AlterField(
-            model_name='invite',
-            name='status',
-            field=models.CharField(choices=[('pending', 'Pending'), ('accepted', 'Accepted'), ('rejected', 'Rejected')], db_default='pending', default='Pending', verbose_name='status'),
+            model_name="invite",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("pending", "Pending"),
+                    ("accepted", "Accepted"),
+                    ("rejected", "Rejected"),
+                ],
+                db_default="pending",
+                default="Pending",
+                verbose_name="status",
+            ),
         ),
     ]

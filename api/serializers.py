@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 from datetime import timedelta
 from ems.emsmodels import *
+from rest_framework import status
 
 
 # User Serializers
@@ -45,6 +46,12 @@ class CreateEventSerializer(serializers.ModelSerializer):
         fields = ["title", "host", "description", "event_type", "venue", "event_time"]
 
         read_only_fields = ["host"]
+
+    def validate_event_time(self, value):
+        if value - timedelta(hours=1) <= timezone.now():
+            raise serializers.ValidationError('Event time must be of after 5 minutes of the time of creation of event.')
+        
+        return value
 
 
 class PublicEventsListSerializer(serializers.ModelSerializer):
@@ -126,3 +133,38 @@ class CreateInviteSerializer(serializers.ModelSerializer):
             serializers.ValidationError(
                 "Invite must be sent at least 10 minutes before the event!"
             )
+
+
+class EventListSerialzer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+
+# class InvitedListSerializer(serializers.ModelSerializer):
+#     # event = serializers.StringRelatedField()
+#     event = serializers.SerializerMethodField(source="event_invites")
+
+#     class Meta:
+#         model = Invite
+#         fields = ['event', 'receiver_email', 'status']
+
+
+class EventListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ['event_id', 'title', 'venue', 'event_time']
+ 
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'
+ 
+class InvitedListSerializer(serializers.ModelSerializer):
+    event = EventSerializer()   # Nested serializer simply JOINS the relations
+ 
+    class Meta:
+        model = Invite
+        fields = ['event', 'receiver_email', 'status']
+ 
+ 

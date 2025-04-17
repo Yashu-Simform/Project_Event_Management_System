@@ -10,6 +10,33 @@
         <button type="button" class="btn btn-outline-primary">Upload File</button>
     </div>
 
+    <div style="height:15px;"></div>
+    <h3 class="primary-text">Invitations Sent:</h3>
+    <table id="eventslist" class="table my-table">
+        <thead>
+            <tr>
+                <th scope="col" class="custom-min-col-width">Sr. No.</th>
+                <th scope="col" class="custom-min-col-width">Event Title</th>
+                <th scope="col" class="custom-min-col-width">Event Date</th>
+                <th scope="col" class="custom-min-col-width">Event Time</th>
+                <th scope="col" class="custom-min-col-width">Invited To</th>
+                <th scope="col" class="custom-min-col-width">Status</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for e in invites %}
+            <tr id="{{ forloop.counter }}">
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ e.event.title }}</td>
+                <td>{{ e.event.event_time }}</td>
+                <td>{{ e.event.event_time }}</td>
+                <td>{{ e.receiver_email }}</td>
+                <td>{{ e.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <div class="modal fade" id="invitesentmodel" tabindex="-1" aria-labelledby="inviteSentLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">

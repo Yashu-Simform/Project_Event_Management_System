@@ -142,11 +142,27 @@ class InvitationsView(View):
     def get(self, req):
         tokens = get_tokens(req)
         choices = get_event_choice_data(tokens)
+
+        invited_list = self.get_invited_list(tokens) 
         print(choices)
         form_obj = InviteSentForm()
         form_obj.fields.get("event_id").choices = choices
-        context = {"form_obj": form_obj}
+        context = {"form_obj": form_obj, "invites": invited_list}
         return render(req, "InvitationsBase.html", context=context)
+    
+    def get_invited_list(self, tokens):
+        access_token = tokens.get("access")
+        header = {"Authorization": f"Bearer {access_token}"}
+        
+        response = requests.get(
+            # reverse('invited_list'),
+            "http://127.0.0.1:8000/api/invite/invited-list/",
+            headers=header
+        )
+        # print(response.text)
+        json_data = json.loads(str(response.text))
+        print(json_data)
+        return json_data
 
 
 def get_event_choice_data(tokens):

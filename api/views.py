@@ -57,7 +57,7 @@ class CreateEvent(APIView):
         serializer = CreateEventSerializer(data=eventdata)
         if not serializer.is_valid():
             return Response(
-                {"status": status.HTTP_400_BAD_REQUEST, "message": "Invalid Data!"}
+                {"status": status.HTTP_400_BAD_REQUEST, "message": f"Invalid Data! Error: {serializer.errors}"}
             )
 
         serializer.save(host=self.request.user)

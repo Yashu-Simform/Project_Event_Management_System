@@ -30,6 +30,15 @@ class Event(models.Model):
         max_length=15,
     )
 
+    def clean(self):
+        if self.total_participants < 0:
+            raise Exception('Number of participants can not be negative.')
+        return super().clean()
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
+
 
 class Invite(models.Model):
     invite_id = models.AutoField(
@@ -71,5 +80,5 @@ class Invite(models.Model):
         auto_now=True, auto_created=True, null=True, blank=True
     )
     event = models.ForeignKey(
-        Event, on_delete=models.CASCADE, blank=True, null=False
+        Event, on_delete=models.CASCADE, blank=True, null=False, related_name='event_invites'
     )  # FK -> Event

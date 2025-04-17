@@ -8,4 +8,9 @@ urlpatterns = [
         ResponseToInvitation.as_view(),
         name="invitation_response",
     ),
+    path(
+        "invited-list/",
+        UserInviteListView.as_view(),
+        name="invited_list"
+    )
 ]

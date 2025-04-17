@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from ems import emsmodels
+from django.db import connection
 from rest_framework.views import APIView
 from rest_framework import generics, mixins
 from django.contrib.auth.models import User
@@ -91,3 +92,28 @@ class ResponseToInvitation(APIView):
                 "message": "Invalid query params!",
             }
         )
+
+class InvitedListView(generics.ListAPIView):
+
+    permission_classes = [IsAuthenticated]
+
+    queryset = Invite.objects.all()
+    serializer_class = InvitedListSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        qs = Invite.objects.filter(invite_from=user.id)
+        # qs = Invite.objects.select_related('event').filter(invite_from=user.id)
+
+        # qs = user.invite_from.all()
+        # print([e.event.title for e in qs])
+        return qs
+    
+
+class UserInviteListView(generics.ListAPIView):
+    serializer_class = InvitedListSerializer
+ 
+    def get_queryset(self):
+        user = self.request.user
+        qs = Invite.objects.filter(invite_from=user.id).select_related('event')
+        return qs

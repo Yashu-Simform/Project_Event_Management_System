@@ -6,7 +6,10 @@
 {% block main_content %}
 <div class="event-list-section">
     <div style="height:15px;"></div>
-    <h3 class="primary-text">Public Events:</h3>
+    <h3 class="primary-text">My Events:</h3>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <a href= {% url "event_create_page" %} type="button" class="btn btn-outline-primary">Create Event</a>
+    </div>
     <table id="eventslist" class="table my-table">
         <thead>
             <tr>

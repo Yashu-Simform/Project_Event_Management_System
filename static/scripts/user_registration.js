@@ -21,7 +21,6 @@ registrationForm.addEventListener('submit', function (event) {
     fetch(event.target.action,{
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${cookie_dict['access']}`,
             'Content-Type': 'application/json',
         },
         body: l_body
@@ -30,8 +29,10 @@ registrationForm.addEventListener('submit', function (event) {
         if (!response.ok){
             alert('There occured some error!')
             window.location.href = "http://127.0.0.1:8000/ems/"
+        }else{
+            alert('Registration Successfully!')
+            return response.json();
         }
-        return response.json();
     })
     .then(data => {
         console.log(data)

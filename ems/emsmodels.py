@@ -1,8 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser, Group, Permission
+from django.core.validators import validate_email
 
 
 # Create your models here.
+class EmsUser(AbstractUser):
+    email = models.EmailField(null=False, validators=[validate_email])
+    groups = models.ManyToManyField(
+        Group,
+        blank=True,
+        related_name="ems_user_set",
+        related_query_name="ems_user",
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        blank=True,
+        related_name="ems_user_set",
+        related_query_name="ems_user",
+    )
+
+
+
 class Event(models.Model):
     event_id = models.AutoField(
         verbose_name="event_id",
@@ -11,7 +29,7 @@ class Event(models.Model):
         blank=True,
         null=False,
     )  # PK
-    host = models.ForeignKey(User, on_delete=models.CASCADE)  # FK -> User
+    host = models.ForeignKey(to=EmsUser, on_delete=models.CASCADE)  # FK -> User
     create_timestamp = models.DateTimeField(
         auto_now=True, auto_created=True, null=True, blank=True
     )
@@ -50,7 +68,7 @@ class Invite(models.Model):
     )  # PK
     invite_from = models.ForeignKey(
         verbose_name="from",
-        to=User,
+        to=EmsUser,
         on_delete=models.CASCADE,
         related_name="invite_from",
         blank=True,
@@ -58,7 +76,7 @@ class Invite(models.Model):
     )  # FK -> User
     invite_to = models.ForeignKey(
         verbose_name="to",
-        to=User,
+        to=EmsUser,
         on_delete=models.CASCADE,
         null=False,
         related_name="invite_to",

@@ -31,7 +31,11 @@
                 <td>{{ e.event.event_time }}</td>
                 <td>{{ e.event.event_time }}</td>
                 <td>{{ e.receiver_email }}</td>
-                <td>{{ e.status }}</td>
+                <td>
+                    <button type="button" class="btn {% if e.status == "Pending" %}btn-primary {% elif e.status == "Accepted" %}btn-success {% else %}btn-danger{% endif %}">
+                        {{ e.status }}
+                    </button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

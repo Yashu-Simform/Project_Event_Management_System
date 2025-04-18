@@ -1,0 +1,48 @@
+const registrationForm = document.getElementById('registrationForm')
+
+registrationForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+    const cookie_dict = get_cookie_dict(document.cookie)
+
+    let formData = new FormData(event.target)
+
+    let object = {}
+
+    formData.forEach((value, key) => {
+        object[key] = value;
+    });
+
+    console.log(object)
+
+    let l_body = JSON.stringify(object);
+    console.log(l_body)
+
+    fetch(event.target.action,{
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${cookie_dict['access']}`,
+            'Content-Type': 'application/json',
+        },
+        body: l_body
+    })
+    .then((response) => {
+        if (!response.ok){
+            alert('There occured some error!')
+            window.location.href = "http://127.0.0.1:8000/ems/"
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data)
+        if (data){
+            document.cookie = `access=${data['access']}; path=/;`
+            document.cookie = `refresh=${data['refresh']}; path=/;`
+            alert('Registration Successfully!');
+            document.location.href = 'http://127.0.0.1:8000/ems/user/dashboard/';
+        }else{
+            console.log('No response data!')
+        }
+    })
+    .then(error => console.log(error))
+});

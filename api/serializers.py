@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 from datetime import timedelta
@@ -11,24 +11,25 @@ from rest_framework import status
 class UserBaseSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = User
+        model = EmsUser
         fields = "__all__"
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(style={'input_type': 'password'},write_only=True)
 
     class Meta:
-        model = User
+        model = EmsUser
         fields = ["username", "email", "first_name", "last_name", "password"]
 
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
+        user = EmsUser.objects.create_user(**validated_data)
         return user
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = EmsUser
         fields = ["username", "password"]
 
 

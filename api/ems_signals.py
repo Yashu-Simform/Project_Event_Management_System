@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from ems.emsmodels import *
-from .utils import send_invite_mail
+from .utils import send_mail_ems
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
 from .tasks import send_reminder_mail
 from datetime import timedelta
@@ -33,7 +33,7 @@ def send_invitation_mail(sender, instance, created, **kwargs):
 
     print("Event time dirs: ", dir(event.event_time))
     try:
-        send_invite_mail(
+        send_mail_ems(
             f"Invitation for event: {event.title}",
             context,
             [instance.receiver_email],

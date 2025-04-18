@@ -30,9 +30,17 @@ def add(x, y):
 #     print(f'Request: {self.request!r}')
 
 
+# app.conf.beat_schedule = {
+#     "event_reminder": {
+#         "task": "api.tasks.send_reminder_mail",
+#         "schedule": crontab(minute=10),
+#     }
+# }
+
 app.conf.beat_schedule = {
-    "event_reminder": {
-        "task": "api.tasks.send_reminder_mail",
-        "schedule": crontab(minute=10),
-    }
+    'tomorrow_events': {
+        'task': 'api.tasks.tomorrow_events_mail',
+        'schedule': crontab(hour=12,minute=15),
+    },
 }
+app.conf.timezone = 'Asia/Kolkata'

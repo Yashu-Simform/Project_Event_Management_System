@@ -1,15 +1,16 @@
 from django.shortcuts import render
-from ems import emsmodels
+from ems.emsmodels import *
 from django.db import connection
 from rest_framework.views import APIView
 from rest_framework import generics, mixins
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from ems.emsmodels import EmsUser
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .serializers import *
 from rest_framework import status as status_code
-from .utils import send_invite_mail
+from .utils import send_mail_ems
 from datetime import datetime
 
 
@@ -23,7 +24,7 @@ class CreateInvite(APIView):
         # event_id = invite_data['event_id'] if 'event_id' in invite_data else None
 
         # if not event_id:
-        #     return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'message': 'Event ID is required!'})
+        #     return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'data': 'Event ID is required!'})
 
         # invite_data.pop('event_id')
 
@@ -34,16 +35,16 @@ class CreateInvite(APIView):
             # try:
             #     event = Event.objects.get(event_id = event_id)
             # except:
-            #     return Response({'status': status_code.HTTP_404_NOT_FOUND, 'message': 'Event not found!'})
+            #     return Response({'status': status_code.HTTP_404_NOT_FOUND, 'data': 'Event not found!'})
 
             #   Check participant exist in user db.
             try:
-                invite_to = User.objects.get(
+                invite_to = EmsUser.objects.get(
                     email=serializer.validated_data["receiver_email"]
                 )
             except:
                 #   Reference to an anonymous user.
-                invite_to = User.objects.get(id=0)
+                invite_to = EmsUser.objects.get(id=0)
             instance = serializer.save(
                 invite_from=self.request.user, invite_to=invite_to
             )
@@ -51,14 +52,14 @@ class CreateInvite(APIView):
             return Response(
                 {
                     "status": status_code.HTTP_200_OK,
-                    "message": "Invite Sent Successfully!",
+                    "data": "Invite Sent Successfully!",
                 }
             )
         else:
             print(serializer.errors)
 
         return Response(
-            {"status": status_code.HTTP_400_BAD_REQUEST, "message": "Invalid Data!"}
+            {"status": status_code.HTTP_400_BAD_REQUEST, "data": "Invalid Data!"}
         )
 
 
@@ -69,7 +70,7 @@ class ResponseToInvitation(APIView):
             return Response(
                 {
                     "status": status_code.HTTP_404_NOT_FOUND,
-                    "message": "Invite not found!",
+                    "data": "Invite not found!",
                 }
             )
 
@@ -77,19 +78,19 @@ class ResponseToInvitation(APIView):
             invite.status = "Accepted"
             invite.save()
             return Response(
-                {"status": status_code.HTTP_200_OK, "message": "Invite Accepted!"}
+                {"status": status_code.HTTP_200_OK, "data": "Invite Accepted!"}
             )
         elif status == "Declined":
             invite.status = "Declined"
             invite.save()
             return Response(
-                {"status": status_code.HTTP_200_OK, "message": "Invite Declined!"}
+                {"status": status_code.HTTP_200_OK, "data": "Invite Declined!"}
             )
 
         return Response(
             {
                 "status": status_code.HTTP_400_BAD_REQUEST,
-                "message": "Invalid query params!",
+                "data": "Invalid query params!",
             }
         )
 

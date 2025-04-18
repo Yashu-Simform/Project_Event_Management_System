@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect
 from .myforms import *
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 import json
 import requests
@@ -31,10 +31,7 @@ class UserRegistration(View):
     def get(self, req):
         form_obj = UserRegistrationForm()
         context = {"form_obj": form_obj}
-        return render(req, "UserBaseForm.html", context=context)
-
-    # def post(self, req):
-    #     form_obj = UserRegistration(req.POST)
+        return render(req, "UserRegistrationForm.html", context=context)
 
 
 class UserLogin(View):
@@ -84,8 +81,8 @@ class EventDetail(View):
 class UserDashboard(View):
     def get(self, req):
         print(req.headers)
-        cookie_dict = get_cookie_dict(req.headers["Cookie"])
-        if not user_authenticate(cookie_dict):
+        # cookie_dict = get_cookie_dict(req.headers["Cookie"])
+        if not user_authenticate(req):
             print("Not authorized")
             return HttpResponseRedirect(reverse("user_login_page"))
 
@@ -161,7 +158,6 @@ class InvitationsView(View):
         )
         # print(response.text)
         json_data = json.loads(str(response.text))
-        print(json_data)
         return json_data
 
 
@@ -186,7 +182,10 @@ def get_tokens(req):
     return {"access": cookie_dict["access"], "refresh": cookie_dict["refresh"]}
 
 
-def user_authenticate(cookie_dict) -> bool:
+def user_authenticate(req) -> bool:
+    if not ("Cookie" in req.headers) and not ("access" in req.headers):
+        return False
+    cookie_dict = get_cookie_dict(req.headers["Cookie"])
     print("Cookie dict", cookie_dict)
 
     if (not ("access" in cookie_dict)) or (not ("refresh" in cookie_dict)):

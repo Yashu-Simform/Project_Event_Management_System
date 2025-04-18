@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Div, Button, HTML
 from django.urls import reverse
@@ -27,7 +27,7 @@ class UserRegistrationForm(forms.ModelForm):
         )
 
     class Meta:
-        model = User
+        model = EmsUser
         fields = ['username', 'email', 'first_name', 'last_name', 'password']
 
 
@@ -50,7 +50,7 @@ class UserLoginForm(forms.ModelForm):
         )
 
     class Meta:
-        model = User
+        model = EmsUser
         fields = ['username', 'password']
 
 # Event Form

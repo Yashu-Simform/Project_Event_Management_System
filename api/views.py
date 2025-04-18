@@ -1,16 +1,18 @@
 from django.shortcuts import render
-from ems import emsmodels
+from ems.emsmodels import *
 from rest_framework.views import APIView
 from rest_framework import generics, mixins
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import *
 from rest_framework import status
 from rest_framework import status
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from rest_framework_simplejwt.tokens import RefreshToken
+
 import time
 
 from .views_invite import *
@@ -20,7 +22,7 @@ from .views_event import *
 
 
 class PublicEventList(generics.ListAPIView):
-    queryset = emsmodels.Event.objects.filter(event_type="public")
+    queryset = Event.objects.filter(event_type="public")
     serializer_class = PublicEventsListSerializer
 
     @method_decorator(cache_page(60 * 3 * 1, key_prefix="public_events_list"))
@@ -46,7 +48,7 @@ class CreateEvent(APIView):
             return Response(
                 {
                     "status": status.HTTP_401_UNAUTHORIZED,
-                    "message": "Unauthorized Request!",
+                    "data": "Unauthorized Request!",
                 }
             )
 
@@ -57,7 +59,7 @@ class CreateEvent(APIView):
         serializer = CreateEventSerializer(data=eventdata)
         if not serializer.is_valid():
             return Response(
-                {"status": status.HTTP_400_BAD_REQUEST, "message": f"Invalid Data! Error: {serializer.errors}"}
+                {"status": status.HTTP_400_BAD_REQUEST, "data": f"Invalid Data! Error: {serializer.errors}"}
             )
 
         serializer.save(host=self.request.user)
@@ -65,7 +67,7 @@ class CreateEvent(APIView):
         return Response(
             {
                 "status": status.HTTP_201_CREATED,
-                "message": "Event created successfully!",
+                "data": "Event created successfully!",
             }
         )
 
@@ -102,15 +104,30 @@ class UserEventsList(generics.ListAPIView):
         return qs
 
 
-class UserRegistration(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserRegistrationSerializer
+class UserRegistration(APIView):
+    # authentication_classes = []
+    # permission_classes = [AllowAny]
+    # queryset = EmsUser.objects.all()
+    # serializer_class = UserRegistrationSerializer
+
+    def post(self, req):
+        serializer = UserRegistrationSerializer(data=req.data)
+
+        if serializer.is_valid():
+            # valid_data = serializer.validated_data
+            user = serializer.save()
+
+            refresh = RefreshToken.for_user(user)
+            
+            return Response({'status': status_code.HTTP_201_CREATED, 'data': {'refresh': str(refresh), 'access': refresh.access_token}})
+
+        return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'data': f'Invalid data. \n {serializer.error_messages}'})
 
 
 class UserLogout(APIView):
     def get(self, req):
         req.COOKIES.clear()
-        return Response({"status": status.HTTP_200_OK, "message": "Logout Successful!"})
+        return Response({"status": status.HTTP_200_OK, "data": "Logout Successful!"})
 
 
 # class UserLogin(APIView):

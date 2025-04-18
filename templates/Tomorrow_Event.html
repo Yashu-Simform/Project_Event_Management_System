@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tomorrow's Events: </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f8fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #333333;
+    }
+    .details {
+      margin-bottom: 30px;
+    }
+    {% comment %} .details p {
+      margin: 8px 0;
+      color: #555555;
+    } {% endcomment %}
+    .event-li{
+        text-decoration: none;
+        margin: 8px 0;
+        color: #555555;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      font-size: 16px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+    .accept {
+      background-color: #28a745;
+    }
+    .decline {
+      background-color: #dc3545;
+    }
+    .event-table{
+        border-collapse: collapse;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888888;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <input type="hidden" style="display:hidden;" name="invite_id" value="{{e.invite_id}}">
+    <div class="header">
+      <h2>Tomorrow's Events: </h2>
+    </div>
+    <div class="details">
+        <ul>
+            <table class="event-table">
+                <th>
+                    <td>Title</td>
+                    <td>Time</td>
+                </th>
+                {% for e in events %}
+                    <tr>
+                        <td>{{e.title}}</td>
+                        <td>{{e.event_time.time}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </ul>
+    </div>
+    <pre class="footer">
+        Visit site for checking events: <a href="{% url "welcome_page" %}"></a>
+        If you have any questions, feel free to contact Captain Rogers Doe at captain.rogers.q@gmail.com.
+    </pre>
+  </div>
+</body>
+</html>

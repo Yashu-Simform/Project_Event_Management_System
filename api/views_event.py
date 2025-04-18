@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from ems import emsmodels
+from ems.emsmodels import *
 from rest_framework.views import APIView
 from rest_framework import generics, mixins
 from django.contrib.auth.models import User
@@ -18,7 +18,8 @@ class EventChoiceData(generics.ListAPIView):
     serializer_class = EventChoicesSerializer
 
     def get_queryset(self):
-        user = self.request.user
+        # print(dir(self.request))
+        print(type(self.request.user))
 
-        qs = Event.objects.filter(host=user)
+        qs = Event.objects.all()
         return qs

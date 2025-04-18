@@ -38,6 +38,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "ems",
+    "api",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -50,9 +52,9 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "django_celery_results",
     "django_celery_beat",
-    "api",
-    "ems",
 ]
+
+AUTH_USER_MODEL = "ems.EmsUser"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 

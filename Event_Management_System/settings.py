@@ -158,9 +158,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REST_AUTH = {
-    "USE_JWT": True,
-}
+# REST_AUTH = {
+#     "USE_JWT": True,
+# }
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -207,3 +207,7 @@ CELERY_RESULT_EXTENDED = True
 
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
+
+# Email schecdule timings
+TOMORROW_EVENT_EMAIL_HOUR = 10
+TOMORROW_EVENT_EMAIL_MINUTE = 30

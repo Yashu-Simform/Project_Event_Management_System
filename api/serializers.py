@@ -49,8 +49,8 @@ class CreateEventSerializer(serializers.ModelSerializer):
         read_only_fields = ["host"]
 
     def validate_event_time(self, value):
-        if value - timedelta(hours=1) <= timezone.now():
-            raise serializers.ValidationError('Event time must be of after 5 minutes of the time of creation of event.')
+        if (value - timedelta(hours=1)) <= timezone.now():
+            raise serializers.ValidationError('Event time must be of after 1 hour of the time of creation of event.')
         
         return value
 

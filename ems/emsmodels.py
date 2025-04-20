@@ -100,3 +100,9 @@ class Invite(models.Model):
     event = models.ForeignKey(
         Event, on_delete=models.CASCADE, blank=True, null=False, related_name='event_invites'
     )  # FK -> Event
+    req_type = models.CharField(
+        choices={'invitation': 'Invitation', 'participation': 'Participation'},
+        default='invitation',
+        blank=True,
+        null=False,
+    )

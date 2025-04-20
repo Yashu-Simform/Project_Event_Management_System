@@ -18,6 +18,8 @@ def send_invitation_mail(sender, instance, created, **kwargs):
         with connection.cursor() as cursor:
             cursor.execute(sql="CALL update_total_participants(%s)", params=[event_id])
         return
+    
+    
     try:
         event = Event.objects.get(event_id=instance.event.event_id)
     except Event.DoesNotExist as e:

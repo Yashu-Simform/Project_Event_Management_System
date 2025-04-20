@@ -98,6 +98,7 @@ class CreateInviteSerializer(serializers.ModelSerializer):
             "event",
             "receiver_email",
             "event_id",
+            'req_type'
         ]
         # fields.append('email')
 

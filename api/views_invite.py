@@ -20,24 +20,11 @@ class CreateInvite(APIView):
 
     def post(self, request, *args, **kwargs):
         invite_data = request.data
-        # print(invite_data)
-        # event_id = invite_data['event_id'] if 'event_id' in invite_data else None
-
-        # if not event_id:
-        #     return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'data': 'Event ID is required!'})
-
-        # invite_data.pop('event_id')
 
         serializer = CreateInviteSerializer(data=invite_data)
 
         if serializer.is_valid():
-            #   Get event from db.
-            # try:
-            #     event = Event.objects.get(event_id = event_id)
-            # except:
-            #     return Response({'status': status_code.HTTP_404_NOT_FOUND, 'data': 'Event not found!'})
 
-            #   Check participant exist in user db.
             try:
                 invite_to = EmsUser.objects.get(
                     email=serializer.validated_data["receiver_email"]
@@ -118,3 +105,23 @@ class UserInviteListView(generics.ListAPIView):
         user = self.request.user
         qs = Invite.objects.filter(invite_from=user.id).select_related('event')
         return qs
+    
+class ParticipateInvite(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, req):
+        data = req.data
+
+        serializer = CreateInviteSerializer(data=data)
+
+        if serializer.is_valid():
+            try:
+                invite_to = EmsUser.objects.get(id=data['host'])
+            except:
+                return Response({'status': status_code.HTTP_404_NOT_FOUND, 'data': 'User not found!'})
+            
+            serializer.save(invite_from=self.request.user, invite_to=invite_to, receiver_email=invite_to.email, req_type='participation')
+        
+            return Response({'status': status_code.HTTP_200_OK, 'data': 'Invite Sent Successfully!'})
+        else:
+            return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'data': serializer.errors})

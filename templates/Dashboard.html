@@ -67,7 +67,7 @@
                   <td>{{ e.event_time }}</td>
                   <td>{{ e.total_participants }}</td>
                   <td>
-                      <a href="#" class="btn btn-primary">Participate</a>
+                      <a id="{{e.event_id}}" name="participateBtn" href="#" class="btn btn-primary" data-host="{{e.host}}">Participate</a>
                   </td>
               </tr>
               {% endfor %}

@@ -3,6 +3,7 @@ import os
 from celery import Celery
 from celery.schedules import crontab
 from time import sleep
+from django.conf import settings
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Event_Management_System.settings")
@@ -40,7 +41,7 @@ def add(x, y):
 app.conf.beat_schedule = {
     'tomorrow_events': {
         'task': 'api.tasks.tomorrow_events_mail',
-        'schedule': crontab(hour=12,minute=15),
+        'schedule': crontab(hour=settings.TOMORROW_EVENT_EMAIL_HOUR,minute=settings.TOMORROW_EVENT_EMAIL_MINUTE),
     },
 }
 app.conf.timezone = 'Asia/Kolkata'

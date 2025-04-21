@@ -17,4 +17,5 @@ def sub(x, y):
 @shared_task
 def tomorrow_events_mail():
     mail_data = tomorrows_events()
+    print(mail_data)
     send_mail_ems(**mail_data)

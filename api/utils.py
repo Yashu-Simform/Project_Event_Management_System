@@ -23,17 +23,17 @@ def tomorrows_events():
     tomorrow = timezone.now() + timezone.timedelta(days=1)
     tomorrow_start = tomorrow.replace(hour=0,minute=0,second=0,microsecond=0)
     tomorrow_end = tomorrow_start + timezone.timedelta(days=1)
-    qs = Event.objects.filter(event_type="public", event_time__gte=tomorrow_start, event_time__lt=tomorrow_end)
-    context = {
-        'events': list(qs)
-    }
+    qs = Event.objects.filter(event_type="public", event_time__gte=tomorrow_start, event_time__lt=tomorrow_end).values('title', 'event_time')
+    context = list(qs)
 
     subject = "Tomorrow's Events: "
-    html_content = render_to_string("Tomorrow_Event.html", context=context)
-    recipient_list = list(EmsUser.objects.values('email'))
+    # html_content = render_to_string("Tomorrow_Event.html", context=context)
+    recipient_list = list(EmsUser.objects.values_list('email', flat=True))
 
     return {
         'subject': subject,
-        'html_content': html_content,
-        'recipient_list': recipient_list
+        'context': context,
+        'recipient_list': [recipient_list[1]],
+        'html_template': "Tomorrow_Event.html",
+        'context_obj_name': 'events'
     }

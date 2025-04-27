@@ -118,4 +118,4 @@ class InviteSentForm(forms.ModelForm):
     
     class Meta:
         model = Invite
-        fields = ['invite_to']
+        fields = ['sent_to']

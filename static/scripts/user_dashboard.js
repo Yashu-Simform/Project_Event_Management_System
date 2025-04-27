@@ -77,22 +77,37 @@ try {
             if (cookie_dict['access'] == undefined || (('access' in cookie_dict) == false)) {
                 window.location.href = 'http://127.0.0.1:8000/ems/user/login/'
             }else{
-    
                 data = {
                     event_id: participateBtn.id,
-                    invite_to: participateBtn.dataset.host,
+                    sent_to: participateBtn.dataset.host,
                 }
+
+                console.log(data)
     
-                fetch('http://127.0.0.1:8000/api/invite/',{
+                fetch('http://127.0.0.1:8000/api/invite/participate-request/',{
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${cookie_dict['access']}`,
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        data
+                        event_id: participateBtn.id,
+                        sent_to: participateBtn.dataset.host,
                     })
                 })
+                .then(res => {
+                    if (! res.ok){
+                        alert('Erro occured in sending the participation request!');
+                    }
+                    return res.json();
+                })
+                .then(
+                    data => {
+                        console.log(data);
+                        alert(data['data']);
+                        window.location.reload();
+                    }
+                )
             }
         })
     });

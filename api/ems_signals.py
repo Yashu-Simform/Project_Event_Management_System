@@ -12,8 +12,7 @@ from django.db import connection
 @receiver(post_save, sender=Invite)
 def send_invitation_mail(sender, instance, created, **kwargs):
     print("Signal called ")
-    if not created:
-        # POST Update
+    if not created and instance.status == "Accepted":
         event_id = instance.event.event_id
         with connection.cursor() as cursor:
             cursor.execute(sql="CALL update_total_participants(%s)", params=[event_id])

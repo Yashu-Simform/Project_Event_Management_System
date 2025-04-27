@@ -12,5 +12,10 @@ urlpatterns = [
         "invited-list/",
         UserInviteListView.as_view(),
         name="invited_list"
+    ),
+    path(
+        "participate-request/",
+        ParticipateInvite.as_view(),
+        name="participate_invite"
     )
 ]

@@ -66,20 +66,20 @@ class Invite(models.Model):
         blank=True,
         null=False,
     )  # PK
-    invite_from = models.ForeignKey(
+    sent_from = models.ForeignKey(
         verbose_name="from",
         to=EmsUser,
         on_delete=models.CASCADE,
-        related_name="invite_from",
+        related_name="sent_from",
         blank=True,
         null=False,
     )  # FK -> User
-    invite_to = models.ForeignKey(
+    sent_to = models.ForeignKey(
         verbose_name="to",
         to=EmsUser,
         on_delete=models.CASCADE,
         null=False,
-        related_name="invite_to",
+        related_name="sent_to",
         blank=True,
     )  # FK -> User
     receiver_email = models.EmailField(
@@ -100,3 +100,9 @@ class Invite(models.Model):
     event = models.ForeignKey(
         Event, on_delete=models.CASCADE, blank=True, null=False, related_name='event_invites'
     )  # FK -> Event
+    req_type = models.CharField(
+        choices={'invitation': 'Invitation', 'participation': 'Participation'},
+        default='invitation',
+        blank=True,
+        null=False,
+    )

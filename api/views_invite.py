@@ -20,33 +20,20 @@ class CreateInvite(APIView):
 
     def post(self, request, *args, **kwargs):
         invite_data = request.data
-        # print(invite_data)
-        # event_id = invite_data['event_id'] if 'event_id' in invite_data else None
-
-        # if not event_id:
-        #     return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'data': 'Event ID is required!'})
-
-        # invite_data.pop('event_id')
 
         serializer = CreateInviteSerializer(data=invite_data)
 
         if serializer.is_valid():
-            #   Get event from db.
-            # try:
-            #     event = Event.objects.get(event_id = event_id)
-            # except:
-            #     return Response({'status': status_code.HTTP_404_NOT_FOUND, 'data': 'Event not found!'})
 
-            #   Check participant exist in user db.
             try:
-                invite_to = EmsUser.objects.get(
+                sent_to = EmsUser.objects.get(
                     email=serializer.validated_data["receiver_email"]
                 )
             except:
                 #   Reference to an anonymous user.
-                invite_to = EmsUser.objects.get(id=0)
+                sent_to = EmsUser.objects.get(id=0)
             instance = serializer.save(
-                invite_from=self.request.user, invite_to=invite_to
+                sent_from=self.request.user, sent_to=sent_to
             )
 
             return Response(
@@ -76,6 +63,7 @@ class ResponseToInvitation(APIView):
 
         if status == "Accepted":
             invite.status = "Accepted"
+            # self.update_participant_count(invite.event.event_id)
             invite.save()
             return Response(
                 {"status": status_code.HTTP_200_OK, "data": "Invite Accepted!"}
@@ -103,10 +91,10 @@ class InvitedListView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        qs = Invite.objects.filter(invite_from=user.id)
-        # qs = Invite.objects.select_related('event').filter(invite_from=user.id)
+        qs = Invite.objects.filter(sent_from=user.id)
+        # qs = Invite.objects.select_related('event').filter(sent_from=user.id)
 
-        # qs = user.invite_from.all()
+        # qs = user.sent_from.all()
         # print([e.event.title for e in qs])
         return qs
     
@@ -116,5 +104,25 @@ class UserInviteListView(generics.ListAPIView):
  
     def get_queryset(self):
         user = self.request.user
-        qs = Invite.objects.filter(invite_from=user.id).select_related('event')
+        qs = Invite.objects.filter(sent_from=user.id).select_related('event')
         return qs
+    
+class ParticipateInvite(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, req):
+        data = req.data
+
+        serializer = CreateInviteSerializer(data=data)
+
+        if serializer.is_valid():
+            try:
+                sent_to = EmsUser.objects.get(id=data['sent_to'])
+            except:
+                return Response({'status': status_code.HTTP_404_NOT_FOUND, 'data': 'User not found!'})
+            
+            serializer.save(sent_from=self.request.user, sent_to=sent_to, receiver_email=sent_to.email, req_type='participation')
+        
+            return Response({'status': status_code.HTTP_200_OK, 'data': 'Invite Sent Successfully!'})
+        else:
+            return Response({'status': status_code.HTTP_400_BAD_REQUEST, 'data': serializer.errors})

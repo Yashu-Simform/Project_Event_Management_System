@@ -33,7 +33,8 @@ def tomorrows_events():
     return {
         'subject': subject,
         'context': context,
-        'recipient_list': [recipient_list[1]],
+        'recipient_list': [recipient_list[1]], # For testing only
+        # 'recipient_list': recipient_list,
         'html_template': "Tomorrow_Event.html",
         'context_obj_name': 'events'
     }

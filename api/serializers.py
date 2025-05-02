@@ -91,13 +91,14 @@ class CreateInviteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invite
         fields = [
-            "invite_from",
-            "invite_to",
+            "sent_from",
+            "sent_to",
             "status",
             "create_timestamp",
             "event",
             "receiver_email",
             "event_id",
+            'req_type'
         ]
         # fields.append('email')
 

@@ -10,7 +10,7 @@ from django.db import connection
 
 
 @receiver(post_save, sender=Invite)
-def send_invitation_mail(sender, instance, created, **kwargs):
+def send_invitation_mail(sender, instance: Invite, created, **kwargs):
     print("Signal called ")
     if not created and instance.status == "Accepted":
         event_id = instance.event.event_id
@@ -32,22 +32,30 @@ def send_invitation_mail(sender, instance, created, **kwargs):
         "invite_id": instance.invite_id,
     }
 
-    print("Event time dirs: ", dir(event.event_time))
     try:
+        
+        if instance.req_type == "Invitation":
+            subject = f"Invitation for event: {event.title}"
+            html_template="invitation_template.html"
+        else:
+            subject = f"Request to participate for event: {event.title}"
+            html_template="participation_request_mail.html"
+
         send_mail_ems(
-            f"Invitation for event: {event.title}",
+            subject,
             context,
             [instance.receiver_email],
-            html_template="invitation_template.html",
+            html_template=html_template,
         )
 
         # Schedule reminder mail
-        eta_argu = context["event_time"] - timedelta(minutes=2)
-        if eta_argu >= timezone.now():
-            send_reminder_mail.apply_async(
-                (context, [instance.receiver_email]),
-                eta=eta_argu,
-                expires=context["event_time"],
-            )
+        if instance.req_type == "Invitation":
+            eta_argu = context["event_time"] - timedelta(minutes=2)
+            if eta_argu >= timezone.now():
+                send_reminder_mail.apply_async(
+                    (context, [instance.receiver_email]),
+                    eta=eta_argu,
+                    expires=context["event_time"],
+                )
     except Exception as e:
         raise e

@@ -55,8 +55,8 @@ function main(){
         })
         .then(data => {
             console.log(data)
-            alert(data['message']);
-            window.location.reload(true);
+            alert(data['data']);
+            window.location.href = 'http://127.0.0.1:8000/ems/user/dashboard/';
         })
         .then(error => console.log(error))
     })

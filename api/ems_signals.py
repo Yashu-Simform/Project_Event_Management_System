@@ -1,5 +1,5 @@
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from ems.emsmodels import *
 from .utils import send_mail_ems
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
@@ -12,12 +12,6 @@ from django.db import connection
 @receiver(post_save, sender=Invite)
 def send_invitation_mail(sender, instance: Invite, created, **kwargs):
     print("Signal called ")
-    if not created and instance.status == "Accepted":
-        event_id = instance.event.event_id
-        with connection.cursor() as cursor:
-            cursor.execute(sql="CALL update_total_participants(%s)", params=[event_id])
-        return
-    
     
     try:
         event = Event.objects.get(event_id=instance.event.event_id)
@@ -59,3 +53,13 @@ def send_invitation_mail(sender, instance: Invite, created, **kwargs):
                 )
     except Exception as e:
         raise e
+
+@receiver(pre_save, sender=Invite)
+def invite_pre_save(sender, instance: Invite, **kwargs):
+    # Checking whether the instance is already created. 
+    if instance.invite_id:
+        event_id = instance.event.event_id
+        with connection.cursor() as cursor:
+            # cursor.execute(sql="CALL update_total_participants(%s)", params=[event_id])
+            cursor.execute(sql="CALL update_total_participants_v2(%s, %s);", params=[instance.invite_id, instance.status])
+        return

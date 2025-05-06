@@ -50,21 +50,14 @@ async function login() {
             event.preventDefault();
 
             let csrf_token = document.getElementsByName('csrfmiddlewaretoken')
-            // console.log(csrf_token.value)
 
             let username_field = document.getElementsByName('username')
-            // console.log(username_field[0].value)
 
             let pass_field = document.getElementsByName('password')
-            // console.log(pass_field[0].value)
 
             const data_body = {"csrfmiddlewaretoken": csrf_token[0].value.toString(), "username": username_field[0].value.toString(), "password": pass_field[0].value.toString()}
 
             const cookie_dict = get_cookie_dict(document.cookie)
-
-            // if (!cookie_dict['refresh']){
-            //     document.cookie = `refresh=${data['data']['refresh']}; path=/;`
-            // }
 
             await getAuthJWT("http://127.0.0.1:8000/api/user/newtoken/", data_body, cookie_dict);
             console.log('You are now loggedin.')
@@ -84,7 +77,14 @@ async function getAuthJWT(p_url, p_body, cookie_dict) {
         body: JSON.stringify({username: p_body['username'], password: p_body['password']})
     })
     .then(
-        response => response.json(),
+        response => {
+            if (!response.ok){
+                alert('Invalid Credentials!');
+            }else{
+                return response.json();
+            }
+            
+        },
         response => console.log(response)
     )
     .then(data => {

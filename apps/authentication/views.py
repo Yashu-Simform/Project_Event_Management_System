@@ -1,26 +1,15 @@
-from django.shortcuts import render
-from api.models import Invite, Event
-from apps.authentication.models import EmsUser
 from rest_framework.views import APIView
-from rest_framework import generics, mixins
-from django.contrib.auth.models import User
 from rest_framework.response import Response
-from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import *
 from rest_framework import status
 from rest_framework import status
 from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.transaction import atomic
 import time
 
 from api.utils import success_response, error_response
-
-# API's
-from .views_invite import *
-from .views_event import *
 
 from api import logger
 
@@ -29,7 +18,6 @@ class UserRegistration(APIView):
     permission_classes = [AllowAny]
     serializer_class = UserRegistrationSerializer
 
-    @method_decorator(atomic)
     def post(self, req):
         serializer = self.serializer_class(data=req.data)
 
@@ -40,10 +28,10 @@ class UserRegistration(APIView):
             logger.debug(str(refresh))
             logger.debug(str(refresh.access_token))
             
-            return success_response(status=status_code.HTTP_200_OK, message='User Registration Successfull!', data={'refresh': str(refresh), 'access': str(refresh.access_token)})
+            return success_response(status=status.HTTP_200_OK, message='User Registration Successfull!', data={'refresh': str(refresh), 'access': str(refresh.access_token)})
         else:
             logger.debug(serializer.errors)
-            return error_response(status=status_code.HTTP_400_BAD_REQUEST, message='Invalid data', error=serializer.errors)
+            return error_response(status=status.HTTP_400_BAD_REQUEST, message='Invalid data', error=serializer.errors)
 
 class UserLogout(APIView):
     def get(self, req):

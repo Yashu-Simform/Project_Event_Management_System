@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from ems.emsmodels import *
+from api.models import Invite, Event
+from apps.authentication.models import EmsUser
 from rest_framework.views import APIView
 from rest_framework import generics, mixins
 from django.contrib.auth.models import User

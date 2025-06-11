@@ -25,25 +25,21 @@ registrationForm.addEventListener('submit', function (event) {
         },
         body: l_body
     })
-    .then((response) => {
-        if (!response.ok){
-            alert('There occured some error!')
-            window.location.href = "http://127.0.0.1:8000/ems/"
-        }else{
-            alert('Registration Successfully!')
-            return response.json();
-        }
-    })
+    .then((res) => res.json(), (reason) => {console.log(reason)})
     .then(data => {
         console.log(data)
-        if (data){
-            document.cookie = `access=${data['access']}; path=/;`
-            document.cookie = `refresh=${data['refresh']}; path=/;`
-            alert('Registration Successfully!');
-            document.location.href = 'http://127.0.0.1:8000/ems/user/dashboard/';
-        }else{
-            console.log('No response data!')
+        if(data['success']){
+            if (data['data']){
+                document.cookie = `access=${data['data']['access']}; path=/;`
+                document.cookie = `refresh=${data['data']['refresh']}; path=/;`
+                alert('Registration Successfully!');
+                document.location.href = 'http://127.0.0.1:8000/ems/user/dashboard/';
+            }else{
+                console.log('No response data!')
+            }
+        }
+        else{
+            console.log(data['error'])
         }
     })
-    .then(error => console.log(error))
 });

@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 import json
 import requests
 
-from Event_Management_System.celery import add
+from core.celery import add
 from api.tasks import sub
 
 
@@ -26,13 +26,13 @@ def get_public_events_list():
     return events
 
 
+# User Auth Views
 class UserRegistration(View):
 
     def get(self, req):
         form_obj = UserRegistrationForm()
         context = {"form_obj": form_obj}
         return render(req, "UserRegistrationForm.html", context=context)
-
 
 class UserLogin(View):
     def get(self, req):
@@ -42,7 +42,6 @@ class UserLogin(View):
         form_obj = UserLoginForm()
         context = {"form_obj": form_obj}
         return render(req, "UserLoginForm.html", context=context)
-
 
 class UserLogout(View):
     def get(self, req):

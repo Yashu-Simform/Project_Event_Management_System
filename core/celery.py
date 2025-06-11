@@ -6,7 +6,7 @@ from time import sleep
 from django.conf import settings
 
 # Set the default Django settings module for the 'celery' program.
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Event_Management_System.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 
 app = Celery("Event_Management_System")
 

@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from ems.emsmodels import *
+from api.models import Invite, Event
+from apps.authentication.models import EmsUser
 from django.db import connection
 from rest_framework.views import APIView
 from rest_framework import generics, mixins
 # from django.contrib.auth.models import User
-from ems.emsmodels import EmsUser
+from api.models import EmsUser
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated

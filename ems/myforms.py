@@ -3,11 +3,12 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Div, Button, HTML
 from django.urls import reverse
-from .emsmodels import *
+from api.models import Invite, Event
+from apps.authentication.models import EmsUser
+from core.validators import user_model_validations
 
 class UserRegistrationForm(forms.ModelForm):
-    username = forms.CharField(max_length=255, help_text="Username must start with '@'")
-    password = forms.CharField(widget=forms.PasswordInput(render_value=True))
+    password = forms.CharField(widget=forms.PasswordInput(render_value=True), validators=[user_model_validations.validate_password])
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -17,7 +18,6 @@ class UserRegistrationForm(forms.ModelForm):
         self.helper.attrs = {'id': 'registrationForm'}
         self.helper.form_action = reverse('user_registration')
         self.helper.layout = Layout( 
-            'username',
             'email',
             'first_name',
             'last_name',
@@ -28,7 +28,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = EmsUser
-        fields = ['username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['email', 'first_name', 'last_name', 'password']
 
 
 class UserLoginForm(forms.ModelForm):

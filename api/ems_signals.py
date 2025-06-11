@@ -1,6 +1,7 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_save
-from ems.emsmodels import *
+from api.models import Invite, Event
+from apps.authentication.models import EmsUser
 from .utils import send_mail_ems
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
 from .tasks import send_reminder_mail

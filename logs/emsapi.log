@@ -1,0 +1,237 @@
+[DEBUG] 2025-06-11 15:57:31,235 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:04:24,128 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:06:58,322 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:07:48,061 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:08:59,464 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:09:49,729 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:12:00,152 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:12:07,798 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:13:16,563 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:13:43,471 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:15:15,793 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:15:57,389 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[DEBUG] 2025-06-11 16:16:12,326 - views - {'password': [ErrorDetail(string='Invalid Password! Password must contains at least 8 characters.', code='invalid')]}
+[ERROR] 2025-06-11 16:34:21,548 - log - Internal Server Error: /api/user/register/
+Traceback (most recent call last):
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/.pyenv/versions/3.11.11/lib/python3.11/contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/api/views.py", line 38, in post
+    user = serializer.save()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/api/serializers.py", line 37, in create
+    user = EmsUser.objects.create_user(**validated_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+[ERROR] 2025-06-11 16:36:11,067 - log - Internal Server Error: /api/user/register/
+Traceback (most recent call last):
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/.pyenv/versions/3.11.11/lib/python3.11/contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/api/views.py", line 38, in post
+    user = serializer.save()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/api/serializers.py", line 37, in create
+    user = EmsUser.objects.create_user(**validated_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+[DEBUG] 2025-06-11 16:51:32,446 - views - {'username': [ErrorDetail(string='This field is required.', code='required')]}
+[ERROR] 2025-06-11 16:53:54,855 - log - Internal Server Error: /api/user/register/
+Traceback (most recent call last):
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/.pyenv/versions/3.11.11/lib/python3.11/contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/api/views.py", line 36, in post
+    if serializer.is_valid():
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 444, in run_validation
+    self.run_validators(value)
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 477, in run_validators
+    super().run_validators(to_validate)
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/fields.py", line 553, in run_validators
+    validator(value)
+TypeError: 'str' object is not callable
+[DEBUG] 2025-06-11 16:57:39,244 - views - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDI0NjA1OSwiaWF0IjoxNzQ5NjQxMjU5LCJqdGkiOiJmNDYyZWIyZjllZDI0OTg3OTkzNWRlYTU1ZmQ2ZGE1OCIsInVzZXJfaWQiOjF9.EZmpKnd9MaH6tvLNMpdF5ToOsTyPEQAEIRqwhCzcUr8
+[DEBUG] 2025-06-11 16:57:39,244 - views - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NzI3NjU5LCJpYXQiOjE3NDk2NDEyNTksImp0aSI6ImNkNDRhNzE0NDAyNDQ3NTU5MjIzNGQxYzZjOGMxNDlmIiwidXNlcl9pZCI6MX0.oIusXxee4piQf0oZ3ctl721ILU-u2hiGZvRP6l0KP48
+[ERROR] 2025-06-11 16:59:25,942 - log - Internal Server Error: /api/user/register/
+Traceback (most recent call last):
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "api_emsuser_username_key"
+DETAIL:  Key (username)=(user1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/.pyenv/versions/3.11.11/lib/python3.11/contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/api/views.py", line 38, in post
+    user = serializer.save()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 208, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/api/serializers.py", line 51, in create
+    user = EmsUser.objects.create_user(**validated_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/contrib/auth/models.py", line 162, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/contrib/auth/models.py", line 156, in _create_user
+    user.save(using=self._db)
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(*args, **kwargs)
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 892, in save
+    self.save_base(
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 998, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 1161, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/models/base.py", line 1202, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/yashu.ranparia@simform.dom/Project_Event_Management_System/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "api_emsuser_username_key"
+DETAIL:  Key (username)=(user1) already exists.
+
+[DEBUG] 2025-06-11 16:59:56,981 - views - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDI0NjE5NiwiaWF0IjoxNzQ5NjQxMzk2LCJqdGkiOiJkYzM5MjJhNzU5ZDg0M2Q5OTc0ZmFiYzAwMDU4NWE3MSIsInVzZXJfaWQiOjN9.awDwF45A_xzNrvFCrIBraEQKabturkL5Ck2Ep8sUHvc
+[DEBUG] 2025-06-11 16:59:56,981 - views - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NzI3Nzk2LCJpYXQiOjE3NDk2NDEzOTYsImp0aSI6IjA3ZWVmMmI3NzY1YzQyMGM5MWIzMGRmMTAzZjYyZmQwIiwidXNlcl9pZCI6M30.DDdkf95KUYsfDB6La6Q12R-lxzwcs7tapi7H_q6NvnM
+[DEBUG] 2025-06-11 17:03:29,805 - views - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MDI0NjQwOSwiaWF0IjoxNzQ5NjQxNjA5LCJqdGkiOiI3NWZmMjYxNTc0Mzc0YTg5OGM3MjJjMjkzMTg4NmUwMyIsInVzZXJfaWQiOjR9.P0IMEExBPvt6h3T5Oxj3_OqVn_4-9I2TPtrY8MS-XlM
+[DEBUG] 2025-06-11 17:03:29,805 - views - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NzI4MDA5LCJpYXQiOjE3NDk2NDE2MDksImp0aSI6IjgwNzdjZTViYWViNTRkZDQ5ZTJkMTE3ZTlkMDViZDBhIiwidXNlcl9pZCI6NH0.ZkjfnlcyAoTAUQjZ8ZcGxACp3SXDHa6thcxCmWDMYAY

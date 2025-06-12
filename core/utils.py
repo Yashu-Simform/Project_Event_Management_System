@@ -1,9 +1,9 @@
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string
-from api.models import *
-from apps.authentication.models import EmsUser
-from datetime import timedelta, datetime
+from src.apps.authentication.models import EmsUser
+from src.apps.events.models import Event
+from src.apps.invitations.models import Invite
 from django.utils import timezone
 from string import punctuation
 from rest_framework.response import Response
@@ -41,8 +41,6 @@ def send_mail_ems(
     msg.send()
 
 def tomorrows_events():
-    from api.models import Event
-
     tomorrow = timezone.now() + timezone.timedelta(days=1)
     tomorrow_start = tomorrow.replace(hour=0,minute=0,second=0,microsecond=0)
     tomorrow_end = tomorrow_start + timezone.timedelta(days=1)

@@ -1,18 +1,15 @@
 from django.shortcuts import render
-from api.models import Invite, Event
-from apps.authentication.models import EmsUser
+from src.apps.authentication.models import EmsUser
 from django.db import connection
 from rest_framework.views import APIView
 from rest_framework import generics, mixins
 # from django.contrib.auth.models import User
-from api.models import EmsUser
+from src.apps.authentication.models import EmsUser
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .serializers import *
+from src.apps.invitations.serializers import *
 from rest_framework import status as status_code
-from .utils import send_mail_ems
-from datetime import datetime
 
 
 class CreateInvite(APIView):

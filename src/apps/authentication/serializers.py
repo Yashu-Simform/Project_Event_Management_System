@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.authentication.models import EmsUser
+from src.apps.authentication.models import EmsUser
 from core.validators import user_model_validations
 from django.core.validators import validate_email
 

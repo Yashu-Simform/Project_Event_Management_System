@@ -40,8 +40,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "ems",
-    "api",
-    "apps.authentication",
+    "src.apps.authentication",
+    "src.apps.events",
+    "src.apps.invitations",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -63,7 +64,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
-    "api.custom_middleware.TimeForReqResCycleMiddleware",
+    "core.custom_middleware.TimeForReqResCycleMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",

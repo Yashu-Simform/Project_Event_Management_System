@@ -33,14 +33,14 @@ def add(x, y):
 
 # app.conf.beat_schedule = {
 #     "event_reminder": {
-#         "task": "api.tasks.send_reminder_mail",
+#         "task": "core.tasks.send_reminder_mail",
 #         "schedule": crontab(minute=10),
 #     }
 # }
 
 app.conf.beat_schedule = {
     'tomorrow_events': {
-        'task': 'api.tasks.tomorrow_events_mail',
+        'task': 'core.tasks.tomorrow_events_mail',
         'schedule': crontab(hour=settings.TOMORROW_EVENT_EMAIL_HOUR,minute=settings.TOMORROW_EVENT_EMAIL_MINUTE),
     },
 }

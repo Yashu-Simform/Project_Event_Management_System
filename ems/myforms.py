@@ -3,8 +3,9 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Div, Button, HTML
 from django.urls import reverse
-from api.models import Invite, Event
-from apps.authentication.models import EmsUser
+from src.apps.authentication.models import EmsUser
+from src.apps.events.models import Event
+from src.apps.invitations.models import Invite
 from core.validators import user_model_validations
 
 class UserRegistrationForm(forms.ModelForm):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from api.models import EmsUser
+from src.apps.authentication.models import EmsUser
 # # Register your models here.
 
 class MyUserAdmin(UserAdmin):

@@ -1,6 +1,6 @@
 from celery import shared_task
-from .utils import send_mail_ems
-from .utils import tomorrows_events
+from core.utils import send_mail_ems
+from core.utils import tomorrows_events
 
 
 @shared_task

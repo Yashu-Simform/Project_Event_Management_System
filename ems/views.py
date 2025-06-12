@@ -8,7 +8,7 @@ import json
 import requests
 
 from core.celery import add
-from api.tasks import sub
+from core.tasks import sub
 
 
 # Create your views here.

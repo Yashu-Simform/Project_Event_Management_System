@@ -1,10 +1,11 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_save
-from api.models import Invite, Event
-from apps.authentication.models import EmsUser
-from .utils import send_mail_ems
+from src.apps.events.models import Event
+from src.apps.invitations.models import Invite
+from src.apps.authentication.models import EmsUser
+from core.utils import send_mail_ems
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
-from .tasks import send_reminder_mail
+from core.tasks import send_reminder_mail
 from datetime import timedelta
 from django.utils import timezone
 from django.db import connection

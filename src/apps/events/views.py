@@ -1,23 +1,14 @@
-from django.shortcuts import render
-from api.models import Invite, Event
-from apps.authentication.models import EmsUser
+from src.apps.events.models import Event
 from rest_framework.views import APIView
-from rest_framework import generics, mixins
-from django.contrib.auth.models import User
 from rest_framework.response import Response
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from .serializers import *
+from src.apps.events.serializers import *
 from rest_framework import status
 from rest_framework import status
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from rest_framework_simplejwt.tokens import RefreshToken
-from django.db.transaction import atomic
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 import time
-
-from .views_invite import *
-from .views_event import *
 
 
 class PublicEventList(generics.ListAPIView):

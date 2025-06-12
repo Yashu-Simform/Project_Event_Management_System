@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
 )
-from apps.authentication.views import *
+from src.apps.authentication.views import *
 
 urlpatterns = [
     path("register/", UserRegistration.as_view(), name="user_registration"),

@@ -51,15 +51,15 @@ async function login() {
 
             let csrf_token = document.getElementsByName('csrfmiddlewaretoken')
 
-            let username_field = document.getElementsByName('username')
+            let email_field = document.getElementsByName('email')
 
             let pass_field = document.getElementsByName('password')
 
-            const data_body = {"csrfmiddlewaretoken": csrf_token[0].value.toString(), "username": username_field[0].value.toString(), "password": pass_field[0].value.toString()}
+            const data_body = {"csrfmiddlewaretoken": csrf_token[0].value.toString(), "email": email_field[0].value.toString(), "password": pass_field[0].value.toString()}
 
             const cookie_dict = get_cookie_dict(document.cookie)
 
-            await getAuthJWT("http://127.0.0.1:8000/api/user/newtoken/", data_body, cookie_dict);
+            await getAuthJWT("http://127.0.0.1:8000/api/user/login/", data_body, cookie_dict);
             console.log('You are now loggedin.')
         })
     }
@@ -74,7 +74,7 @@ async function getAuthJWT(p_url, p_body, cookie_dict) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({username: p_body['username'], password: p_body['password']})
+        body: JSON.stringify({email: p_body['email'], password: p_body['password']})
     })
     .then(
         response => {
@@ -88,42 +88,11 @@ async function getAuthJWT(p_url, p_body, cookie_dict) {
         response => console.log(response)
     )
     .then(data => {
-        if (data){
-            document.cookie = `access=${data['access']}; path=/;`
-            document.cookie = `refresh=${data['refresh']}; path=/;`
-            alert('Logged in Successfully!');
-            document.location.href = 'http://127.0.0.1:8000/ems/user/dashboard/';
-        }else{
-            console.log('No response data!')
+        console.log(data)
+        if(data['data']['id']){
+            document.cookie = `user_id=${data['data']['id']}; path=/; domain=127.0.0.1;`
+            document.location.href = 'http://127.0.0.1:8000/ems/user/otp-verify/';
         }
+        
     })
-}
-
-
-async function submitForm(p_url, p_body, cookie_dict){
-    console.log(p_url)
-    fetch(p_url,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({username: p_body['username'], password: p_body['password']})
-    })
-    .then(response => response.json())
-    .then(
-        data => {
-            if (data){
-            console.log(data)
-            if (data['status']){
-                if (!cookie_dict['access']){
-                    document.cookie = `access=${data['data']['access']}; path=/;`
-                }
-            }
-            }
-            else{
-                console.log('No response received!')
-            }
-        }
-    )
-    .catch(error => console.error('Error:', error));
 }

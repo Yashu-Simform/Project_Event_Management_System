@@ -33,7 +33,7 @@ class UserRegistrationForm(forms.ModelForm):
 
 
 class UserLoginForm(forms.ModelForm):
-    username = forms.CharField(max_length=255, help_text="Username must start with '@'")
+    email = forms.EmailField(max_length=255, widget=forms.EmailInput())
     password = forms.CharField(widget=forms.PasswordInput(render_value=True))
 
     def __init__(self, *args, **kwargs):
@@ -42,9 +42,9 @@ class UserLoginForm(forms.ModelForm):
         registration_page_url = reverse('user_registration_page')   
         self.helper = FormHelper(self)
         self.helper.attrs = {'id': 'loginForm'}
-        self.helper.form_action = reverse('token_obtain_pair')
+        self.helper.form_action = reverse('user_login')
         self.helper.layout = Layout( 
-            'username',
+            'email',
             'password',
             HTML(f'<p>Create new account ? <a style="color: blue;" href="{registration_page_url}">SignUp</a></p>'),
             Submit('login', 'Login', css_id='loginbtn'),
@@ -52,7 +52,7 @@ class UserLoginForm(forms.ModelForm):
 
     class Meta:
         model = EmsUser
-        fields = ['username', 'password']
+        fields = ['email', 'password']
 
 # Event Form
 class EventForm(forms.ModelForm):

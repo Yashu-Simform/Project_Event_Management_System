@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 360px;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+        h2 {
+            color: #333333;
+            font-weight: 600;
+        }
+        p {
+            color: #666666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .otp-input {
+            font-size: 20px;
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            text-align: center;
+            letter-spacing: 4px;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .otp-input:focus {
+            border-color: #007bff;
+            box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+        }
+        .verify-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        .verify-btn:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.4);
+        }
+        .message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            font-weight: 500;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>OTP Verification</h2>
+        <p>Enter the OTP sent to your registered email.</p>
+        <input type="text" id="otp-input" class="otp-input" placeholder="••••••" maxlength="6">
+        <button id="verify-otp-btn" class="verify-btn">Verify OTP</button>
+        <p id="message" class="message">Invalid OTP. Please try again.</p>
+    </div>
+
+    <script type="module" src="{% static "scripts/otp_verification.js" %}"></script>
+</body>
+</html>

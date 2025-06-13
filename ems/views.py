@@ -49,6 +49,10 @@ class UserLogout(View):
         response.delete_cookie("access", path="/")
         response.delete_cookie("refresh", path="/")
         return response
+    
+class UserOTPVerify(View):
+    def get(self, req):
+        return render(req, "otp_verification.html")
 
 
 # Events

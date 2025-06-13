@@ -59,6 +59,11 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = "authentication.EmsUser"
 
+AUTHENTICATION_BACKENDS = [
+    'src.apps.authentication.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Default username login
+]
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"

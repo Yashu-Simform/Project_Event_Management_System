@@ -6,6 +6,7 @@ urlpatterns = [
     path("user/register/", UserRegistration.as_view(), name="user_registration_page"),
     path("user/login/", UserLogin.as_view(), name="user_login_page"),
     path("user/logout/", UserLogout.as_view(), name="user_logout_page"),
+    path("user/otp-verify/", UserOTPVerify.as_view(), name="user_otp_verify"),
     path("event/create/page/", CreateEvent.as_view(), name="event_create_page"),
     path("user/dashboard/", UserDashboard.as_view(), name="user_dashboard"),
     path(

@@ -2,6 +2,7 @@ from rest_framework import serializers
 from src.apps.authentication.models import EmsUser
 from core.validators import user_model_validations
 from django.core.validators import validate_email
+from src.apps.authentication.utils import OTP
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -30,6 +31,16 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(style={"input_type": "password"}, write_only=True)
     class Meta:
         model = EmsUser
         fields = ["email", "password"]
+
+class OTPVerify(serializers.Serializer):
+    id = serializers.IntegerField()
+    raw_otp = serializers.CharField(max_length=6)
+
+    def validate_raw_otp(self, value:str):
+        if not value.isdigit():
+            serializers.ValidationError("TypeError: Not a valid OTP!")
+        return value
